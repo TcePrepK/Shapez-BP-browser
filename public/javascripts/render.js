@@ -4,7 +4,7 @@ const TILE_REAL_SIZE = TILE_SIZE - 2 * TILE_OVERLAP;
 
 function renderBlueprint( bpString, bgStyle = BG_DARK ) {
   if( !bpString ) {
-    bpString = window.location.hash.substring(1);
+    bpString = document.getElementById('blueprint').innerText;
   }
   let blueprint = parseBlueprintString( bpString );
   

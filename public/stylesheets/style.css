@@ -1,8 +1,22 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+#blueprint {
+  padding: 10px;
+  
+  margin: 10px 0px;
+  
+  width: 60%;
+  height: 100px;
+  
+  word-break: break-all;
+  overflow-y: scroll;
+  
+  color: #DEE1EA;
+  background-color: #3E3F47;
+  font: 12px Consolas, monospace;
+  
+  border: solid 4px #156A8C;
 }
