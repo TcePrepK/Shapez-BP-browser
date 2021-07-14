@@ -1,6 +1,11 @@
 body {
   padding: 50px;
+  background-color: #DEE1EA;
   font: 14px Helvetica, Arial, sans-serif;
+}
+
+#viewer {
+  border: solid 4px #156A8C;
 }
 
 #blueprint {

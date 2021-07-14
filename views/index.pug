@@ -1,1 +1,10 @@
-
+html
+  head
+    title Shapez.io Blueprints
+    link(rel='stylesheet' href='/stylesheets/style.css')
+  body
+    ul
+      each val in blueprints
+        li
+          a(href=val.url) #{val.name}
+          |  by #{val.author}
