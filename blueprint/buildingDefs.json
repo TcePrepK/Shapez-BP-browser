@@ -1,0 +1,2164 @@
+{
+  "definitions": [
+    {
+      "code": 1,
+      "internal": "beltStraight",
+      "name": "Conveyor Belt",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "code": 2,
+      "internal": "beltLeft",
+      "name": "Conveyor Belt",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 3,
+          "type": "beltOut",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 1,
+        "y": 0
+      }
+    },
+    {
+      "code": 3,
+      "internal": "beltRight",
+      "name": "Conveyor Belt",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 1,
+          "type": "beltOut",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 2,
+        "y": 0
+      }
+    },
+    {
+      "code": 4,
+      "internal": "balancer",
+      "name": "Balancer",
+      "height": 1,
+      "width": 2,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "any",
+          "draw": true },
+        {
+          "i": 0, "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "any",
+          "draw": true
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "any",
+          "draw": true
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "any",
+          "draw": true
+        }
+      ],
+      "sprite": {
+        "x": 3,
+        "y": 0
+      }
+    },
+    {
+      "code": 5,
+      "internal": "mergerRight",
+      "name": "Merger (Compact)",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "any",
+          "draw": true
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 1,
+          "type": "beltIn",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "any",
+          "draw": true
+        }
+      ],
+      "sprite": {
+        "x": 1,
+        "y": 1
+      }
+    },
+    {
+      "code": 6,
+      "internal": "mergerLeft",
+      "name": "Merger (Compact)",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "any",
+          "draw": true
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "any",
+          "draw": true
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 3,
+          "type": "beltIn",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 0,
+        "y": 1
+      }
+    },
+    {
+      "code": 7,
+      "internal": "extractor",
+      "name": "Extractor",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "beltIOut",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 5,
+        "y": 0
+      }
+    },
+    {
+      "code": 8,
+      "internal": "extractorChain",
+      "name": "Extractor (Chain)",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 6,
+        "y": 0
+      }
+    },
+    {
+      "code": 9,
+      "internal": "cutter",
+      "name": "Cutter",
+      "height": 1,
+      "width": 2,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "shape",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 6,
+        "y": 2
+      }
+    },
+    {
+      "code": 10,
+      "internal": "cutterQuad",
+      "name": "Quad Cutter",
+      "height": 1,
+      "width": 4,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 2,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 3,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "shape",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 4,
+        "y": 3
+      }
+    },
+    {
+      "code": 11,
+      "internal": "rotator90",
+      "name": "Rotator",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 0,
+        "y": 2
+      }
+    },
+    {
+      "code": 12,
+      "internal": "rotator270",
+      "name": "Rotator (CCW)",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 1,
+        "y": 2
+      }
+    },
+    {
+      "code": 13,
+      "internal": "rotator180",
+      "name": "Rotator (180°)",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 2,
+        "y": 2
+      }
+    },
+    {
+      "code": 14,
+      "internal": "stacker",
+      "name": "Stacker",
+      "height": 1,
+      "width": 2,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 4,
+        "y": 4
+      }
+    },
+    {
+      "code": 15,
+      "internal": "mixer",
+      "name": "Mixer",
+      "height": 1,
+      "width": 2,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "color",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "color",
+          "draw": false
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "color",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 4,
+        "y": 4
+      }
+    },
+    {
+      "code": 16,
+      "internal": "painterLeft",
+      "name": "Painter",
+      "height": 1,
+      "width": 2,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 3,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "facing": 0,
+          "type": "beltIn",
+          "subType": "color",
+          "draw": false
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "facing": 1,
+          "type": "beltOut",
+          "subType": "shape",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 0,
+        "y": 3
+      }
+    },
+    {
+      "code": 17,
+      "internal": "painterRight",
+      "name": "Painter",
+      "height": 1,
+      "width": 2,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 3,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "facing": 1,
+          "type": "beltOut",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "color",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 0,
+        "y": 4
+      }
+    },
+    {
+      "code": 18,
+      "internal": "painterDouble",
+      "name": "Painter (Double)",
+      "height": 2,
+      "width": 2,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 3,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "facing": 0,
+          "type": "beltIn",
+          "subType": "color",
+          "draw": false
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "facing": 1,
+          "type": "beltOut",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 1,
+          "facing": 3,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 2,
+        "y": 3
+      }
+    },
+    {
+      "code": 19,
+      "internal": "painterQuad",
+      "name": "Quad Painter",
+      "height": 1,
+      "width": 4,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "color",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "wireIn",
+          "subType": "boolean",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 3,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "color",
+          "draw": false
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "facing": 2,
+          "type": "wireIn",
+          "subType": "boolean",
+          "draw": false
+        },
+        {
+          "i": 2,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "color",
+          "draw": false
+        },
+        {
+          "i": 2,
+          "j": 0,
+          "facing": 2,
+          "type": "wireIn",
+          "subType": "boolean",
+          "draw": false
+        },
+        {
+          "i": 3,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "color",
+          "draw": false
+        },
+        {
+          "i": 3,
+          "j": 0,
+          "facing": 2,
+          "type": "wireIn",
+          "subType": "boolean",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 4,
+        "y": 5
+      }
+    },
+    {
+      "code": 20,
+      "internal": "trash",
+      "name": "Trash",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "beltIn",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 1,
+          "type": "beltIn",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 3,
+          "type": "beltIn",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 7,
+        "y": 0
+      }
+    },
+    {
+      "code": 21,
+      "internal": "storage",
+      "name": "Storage",
+      "height": 2,
+      "width": 2,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 1,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 1,
+          "facing": 3,
+          "type": "wireOut",
+          "subType": "boolean",
+          "draw": false
+        },
+        {
+          "i": 1,
+          "j": 1,
+          "facing": 0,
+          "type": "wireOut",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 1,
+          "j": 1,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 4,
+        "y": 10
+      }
+    },
+    {
+      "code": 22,
+      "internal": "tunnelMk1In",
+      "name": "Tunnel",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 4,
+        "y": 1
+      }
+    },
+    {
+      "code": 23,
+      "internal": "tunnelMk1Out",
+      "name": "Tunnel",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 5,
+        "y": 1
+      }
+    },
+    {
+      "code": 24,
+      "internal": "tunnelMk2In",
+      "name": "Tunnel",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 6,
+        "y": 1
+      }
+    },
+    {
+      "code": 25,
+      "internal": "tunnelMk2Out",
+      "name": "Tunnel",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 7,
+        "y": 1
+      }
+    },
+    {
+      "code": 26,
+      "internal": "hub",
+      "name": "Hub",
+      "height": 4,
+      "width": 4,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 3,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "facing": 0,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 2,
+          "j": 0,
+          "facing": 0,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 3,
+          "j": 0,
+          "facing": 0,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 3,
+          "j": 0,
+          "facing": 1,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 1,
+          "facing": 3,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 3,
+          "j": 1,
+          "facing": 1,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 2,
+          "facing": 3,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 2,
+          "facing": 3,
+          "type": "wireOut",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 3,
+          "j": 2,
+          "facing": 1,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 3,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 3,
+          "facing": 3,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 1,
+          "j": 3,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 2,
+          "j": 3,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 3,
+          "j": 3,
+          "facing": 1,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 3,
+          "j": 3,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "shape",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 0,
+        "y": 8
+      }
+    },
+    {
+      "code": 27,
+      "internal": "wireGrStraight",
+      "name": "Wire",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 5,
+        "y": 8
+      }
+    },
+    {
+      "code": 28,
+      "internal": "wireGrCorner",
+      "name": "Wire",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 1,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 7,
+        "y": 8
+      }
+    },
+    {
+      "code": 29,
+      "internal": "wireGrTee",
+      "name": "Wire",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 1,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 3,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 6,
+        "y": 8
+      }
+    },
+    {
+      "code": 30,
+      "internal": "wireGrCross",
+      "name": "Wire",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 1,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 3,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 4,
+        "y": 8
+      }
+    },
+    {
+      "code": 31,
+      "internal": "constantSignal",
+      "name": "Constant Signal",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "wireOut",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 1,
+        "y": 5
+      }
+    },
+    {
+      "code": 32,
+      "internal": "logicAnd",
+      "name": "And Gate",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "wireOut",
+          "subType": "boolean",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 1,
+          "type": "wireIn",
+          "subType": "boolean",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 3,
+          "type": "wireIn",
+          "subType": "boolean",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 7,
+        "y": 6
+      }
+    },
+    {
+      "code": 33,
+      "internal": "lever",
+      "name": "Switch",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "wireOut",
+          "subType": "boolean",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 1,
+        "y": 6
+      }
+    },
+    {
+      "code": 34,
+      "internal": "logicNot",
+      "name": "Not Gate",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "wireOut",
+          "subType": "boolean",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "wireIn",
+          "subType": "boolean",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 4,
+        "y": 6
+      }
+    },
+    {
+      "code": 35,
+      "internal": "logicXor",
+      "name": "Xor Gate",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "wireOut",
+          "subType": "boolean",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 1,
+          "type": "wireIn",
+          "subType": "boolean",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 3,
+          "type": "wireIn",
+          "subType": "boolean",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 6,
+        "y": 6
+      }
+    },
+    {
+      "code": 36,
+      "internal": "logicOr",
+      "name": "Or Gate",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "wireOut",
+          "subType": "boolean",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 1,
+          "type": "wireIn",
+          "subType": "boolean",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 3,
+          "type": "wireIn",
+          "subType": "boolean",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 5,
+        "y": 6
+      }
+    },
+    {
+      "code": 37,
+      "internal": "filter",
+      "name": "Filter",
+      "height": 1,
+      "width": 2,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 3,
+          "type": "wireIn",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "facing": 1,
+          "type": "beltOut",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 2,
+        "y": 5
+      }
+    },
+    {
+      "code": 38,
+      "internal": "transistorLeft",
+      "name": "Transistor",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "wireOut",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "wireIn",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 3,
+          "type": "wireIn",
+          "subType": "boolean",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 1,
+        "y": 7
+      }
+    },
+    {
+      "code": 39,
+      "internal": "wireBridge",
+      "name": "Wire Crossing",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 1,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 3,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 7,
+        "y": 7
+      }
+    },
+    {
+      "code": 40,
+      "internal": "display",
+      "name": "Display",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "wireIn",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 0,
+        "y": 6
+      }
+    },
+    {
+      "code": 42,
+      "internal": "virtualCutter",
+      "name": "Virtual Cutter",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 1,
+          "type": "wireOut",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "wireIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 3,
+          "type": "wireOut",
+          "subType": "shape",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 6,
+        "y": 7
+      }
+    },
+    {
+      "code": 43,
+      "internal": "analyzer",
+      "name": "Shape Analyzer",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 1,
+          "type": "wireOut",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "wireIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 3,
+          "type": "wireOut",
+          "subType": "color",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 2,
+        "y": 6
+      }
+    },
+    {
+      "code": 44,
+      "internal": "virtualRotator",
+      "name": "Virtual Rotator",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "wireOut",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "wireIn",
+          "subType": "shape",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 3,
+        "y": 7
+      }
+    },
+    {
+      "code": 45,
+      "internal": "virtualUnstacker",
+      "name": "Virtual Unstacker",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 1,
+          "type": "wireOut",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "wireIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 3,
+          "type": "wireOut",
+          "subType": "shape",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 5,
+        "y": 7
+      }
+    },
+    {
+      "code": 46,
+      "internal": "comparator",
+      "name": "Compare",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "wireOut",
+          "subType": "boolean",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 1,
+          "type": "wireIn",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 3,
+          "type": "wireIn",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 3,
+        "y": 6
+      }
+    },
+    {
+      "code": 47,
+      "internal": "splitterRight",
+      "name": "Merger (Compact)",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "any",
+          "draw": true
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 1,
+          "type": "beltOut",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "any",
+          "draw": true
+        }
+      ],
+      "sprite": {
+        "x": 3,
+        "y": 1
+      }
+    },
+    {
+      "code": 48,
+      "internal": "splitterLeft",
+      "name": "Splitter (Compact)",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "any",
+          "draw": true
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "any",
+          "draw": true
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 3,
+          "type": "beltOut",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 2,
+        "y": 1
+      }
+    },
+    {
+      "code": 49,
+      "internal": "reader",
+      "name": "Belt Reader",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "beltOut",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 1,
+          "type": "wireOut",
+          "subType": "boolean",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIn",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 3,
+          "type": "wireOut",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 0,
+        "y": 5
+      }
+    },
+    {
+      "code": 50,
+      "internal": "virtualStacker",
+      "name": "Virtual Stacker",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "wireOut",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 1,
+          "type": "wireIn",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "wireIn",
+          "subType": "shape",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 4,
+        "y": 7
+      }
+    },
+    {
+      "code": 51,
+      "internal": "virtualPainter",
+      "name": "Virtual Painter",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "wireOut",
+          "subType": "shape",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 1,
+          "type": "wireIn",
+          "subType": "color",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "wireIn",
+          "subType": "shape",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 2,
+        "y": 7
+      }
+    },
+    {
+      "code": 52,
+      "internal": "wireBlStraight",
+      "name": "Wire",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 5,
+        "y": 9
+      }
+    },
+    {
+      "code": 53,
+      "internal": "wireBlCorner",
+      "name": "Wire",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 1,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 7,
+        "y": 9
+      }
+    },
+    {
+      "code": 54,
+      "internal": "wireBlTee",
+      "name": "Wire",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 1,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 3,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 6,
+        "y": 9
+      }
+    },
+    {
+      "code": 55,
+      "internal": "wireBlCross",
+      "name": "Wire",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 1,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 3,
+          "type": "wireBidir",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 4,
+        "y": 9
+      }
+    },
+    {
+      "code": 60,
+      "internal": "transistorRight",
+      "name": "Transistor",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "wireOut",
+          "subType": "any",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 1,
+          "type": "wireIn",
+          "subType": "boolean",
+          "draw": false
+        },
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "wireIn",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 0,
+        "y": 7
+      }
+    },
+    {
+      "code": 61,
+      "internal": "cheatProducer",
+      "name": "Item Producer",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "beltIOut",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 6,
+        "y": 11
+      }
+    },
+    {
+      "code": 62,
+      "internal": "puzzleProducer",
+      "name": "Constant Producer",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 0,
+          "type": "beltIOut",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 6,
+        "y": 10
+      }
+    },
+    {
+      "code": 63,
+      "internal": "puzzleConsumer",
+      "name": "Goal Acceptor",
+      "height": 1,
+      "width": 1,
+      "links": [
+        {
+          "i": 0,
+          "j": 0,
+          "facing": 2,
+          "type": "beltIIn",
+          "subType": "any",
+          "draw": false
+        }
+      ],
+      "sprite": {
+        "x": 7,
+        "y": 10
+      }
+    },
+    {
+      "code": 64,
+      "internal": "block",
+      "name": "Block",
+      "height": 1,
+      "width": 1,
+      "links": [],
+      "sprite": {
+        "x": 7,
+        "y": 11
+      }
+    },
+    {
+      "code": -1,
+      "internal": "beltOut",
+      "height": 1,
+      "width": 1,
+      "sprite": {
+        "x": 3,
+        "y": 2
+      }
+    },
+    {
+      "code": -1,
+      "internal": "beltIn",
+      "height": 1,
+      "width": 1,
+      "sprite": {
+        "x": 4,
+        "y": 2
+      }
+    }
+  ]
+}
