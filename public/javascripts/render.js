@@ -1,5 +1,11 @@
 const TILE_SIZE = 96;
 const TILE_OVERLAP = 6;
+const POST_SCALE = 0.75;
+/*
+const TILE_SIZE = 3;
+const TILE_OVERLAP = 0;
+const POST_SCALE = 4;
+*/
 const TILE_REAL_SIZE = TILE_SIZE - 2 * TILE_OVERLAP;
 
 function renderBlueprint( bpString, bgStyle = BG_DARK ) {
@@ -238,6 +244,9 @@ function initCanvas( width, height, bgMode ) {
   let c = document.getElementById( 'viewer' );
   c.width = pxWidth;
   c.height = pxHeight;
+  
+  c.style.width = pxWidth * POST_SCALE;
+  c.style.height = pxHeight * POST_SCALE;
   
   let ctx = c.getContext( '2d' );
   
