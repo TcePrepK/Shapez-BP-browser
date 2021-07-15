@@ -116,8 +116,18 @@ class Blueprint {
       offset += 6;
       if(entry.type.internal === 'constantSignal') {
         let head = data.readUInt8(offset++);
-        if((head & 0xF8) === 0x00) {
-          // 0000 0xxx = boolean
+        if((head & 0xFE) === 0x04) {
+          // 0000 01xx = flag
+          switch(head & 0x03) {
+            case 3:
+              entry.meta = {
+                type: 'type',
+                data: 'item'
+              };
+              break;
+          }
+        } else if((head & 0xFE) === 0x00) {
+          // 0000 000x = boolean
           entry.meta = {
             type: 'boolean_item',
             data: head
@@ -195,7 +205,13 @@ class Blueprint {
       data.writeUInt8(building.rotation << 2 | building.ogRotation, offset + 5);
       offset += 6;
       if(building.type.internal === 'constantSignal') {
-        if(building.meta.type === 'boolean_item') {
+        if(building.meta.type === 'type') {
+          switch(building.meta.data) {
+            case 'item':
+              data.writeUInt8(0x07, offset++);
+              break;
+          }
+        } else if(building.meta.type === 'boolean_item') {
           data.writeUInt8(building.meta.data & 0x01, offset++);
         } else if(building.meta.type === 'color') {
           data.writeUInt8(SIGNAL_COLORS.indexOf(building.meta.data) & 0x07 | 0x08, offset++);
