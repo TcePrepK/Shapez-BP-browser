@@ -31,10 +31,10 @@ class Blueprint {
   
   trim() {
     const bounds = this.buildings.reduce((bounds, building) => {
-      switch(building.type) {
-        case Building.byName('beltStraight'):
-        case Building.byName('wireGrStraight'):
-        case Building.byName('wireBlStraight'):
+      switch(building.type.internal) {
+        case 'beltStraight':
+        case 'wireGrStraight':
+        case 'wireBlStraight':
           return bounds;
       }
       
@@ -110,10 +110,11 @@ class Blueprint {
         type: Building.byCode(data.readUInt8(offset)),
         x: data.readUInt16LE(offset + 1),
         y: data.readUInt16LE(offset + 3),
-        rotation: data.readUInt8(offset + 5)
+        rotation: data.readUInt8(offset + 5) >> 2 & 0x3,
+        ogRotation: data.readUInt8(offset + 5) & 0x3
       };
       offset += 6;
-      if(entry.type === Building.byName('constantSignal')) {
+      if(entry.type.internal === 'constantSignal') {
         let head = data.readUInt8(offset++);
         if((head & 0xF8) === 0x00) {
           // 0000 0xxx = boolean
@@ -191,9 +192,9 @@ class Blueprint {
       data.writeUInt8(building.type.code, offset);
       data.writeUInt16LE(building.x, offset + 1);
       data.writeUInt16LE(building.y, offset + 3);
-      data.writeUInt8(building.rotation, offset + 5);
+      data.writeUInt8(building.rotation << 2 | building.ogRotation, offset + 5);
       offset += 6;
-      if(building.type === Building.byName('constantSignal')) {
+      if(building.type.internal === 'constantSignal') {
         if(building.meta.type === 'boolean_item') {
           data.writeUInt8(building.meta.data & 0x01, offset++);
         } else if(building.meta.type === 'color') {
@@ -256,9 +257,10 @@ class Blueprint {
         type: Building.byCode(entry.components.StaticMapEntity.code),
         x: entry.components.StaticMapEntity.origin.x,
         y: entry.components.StaticMapEntity.origin.y,
-        rotation: entry.components.StaticMapEntity.rotation / 90
+        rotation: entry.components.StaticMapEntity.rotation / 90,
+        ogRotation: entry.components.StaticMapEntity.rotation / 90
       };
-      if(ret.type === Building.byName('constantSignal')) {
+      if(ret.type.internal === 'constantSignal') {
         ret.meta = {
           type: entry.components.ConstantSignal.signal.$,
           data: entry.components.ConstantSignal.signal.data
@@ -278,12 +280,12 @@ class Blueprint {
               y: building.y - Math.floor(this.height / 2)
             },
             rotation: building.rotation * 90,
-            originalRotation: building.rotation * 90,
+            originalRotation: building.ogRotation * 90,
             code: building.type.code
           }
         }
       };
-      if(building.type === Building.byName('constantSignal')) {
+      if(building.type.internal === 'constantSignal') {
         ret.components.ConstantSignal = {
           signal: {
             $: building.meta.type,
