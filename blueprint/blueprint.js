@@ -332,14 +332,14 @@ class Blueprint {
     return json;
   }
   
-  static importSenseBP(senseBP) {
+  static importShrimpBP(shrimpBP) {
     return Blueprint.importJSON(
       JSON.parse(
         LZString.decompressFromEncodedURIComponent(senseBP)
       )
     );
   }
-  exportSenseBP() {
+  exportShrimpBP() {
     return LZString.compressToEncodedURIComponent(
       JSON.stringify(
         this.exportJSON()
