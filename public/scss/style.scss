@@ -1,0 +1,215 @@
+:root {
+  font: Calibri, Arial, sans-serif;
+}
+
+body {
+  background-color: #ddd;
+
+  margin: 0;
+
+  color: #000;
+  font: 1.5rem Calibri, Arial, sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+.navbar-root {
+  position: relative;
+  z-index: 999;
+
+  padding: 0.5rem 2rem;
+  margin-bottom: 1.5rem;
+
+  background-color: #6af;
+
+  color: #fff;
+
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  .container {
+    max-width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: baseline;
+
+    &::after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+
+    .brand {
+      display: block;
+      margin-left: -0.5rem;
+
+      font-size: 2rem;
+      font-weight: bold;
+
+      img {
+        position: absolute;
+        top: 0.6rem;
+        height: 4rem;
+        width: 4rem;
+      }
+
+      span {
+        padding-left: 5rem;
+      }
+    }
+
+    .nav {
+      display: inline-flex;
+      flex-flow: row nowrap;
+
+      padding: 0 2rem;
+      margin: 0;
+
+      list-style: none;
+      white-space: nowrap;
+
+      .item {
+        padding: 0 1rem;
+
+        font-size: 1.75rem;
+      }
+
+      .link {
+        padding: 0 0.4rem;
+        border-radius: 0.5rem;
+      }
+
+      :hover {
+        background-color: #48d;
+      }
+    }
+
+    .user {
+      display: block;
+      margin-left: auto;
+
+      font-size: 1.75rem;
+      white-space: nowrap;
+
+      :hover img {
+        background-color: #48d;
+      }
+
+      .avatar {
+        position: relative;
+        top: 0.3rem;
+        margin: -0.3rem 0;
+        height: 2rem;
+        width: 2rem;
+        padding: 0.2rem;
+        border-radius: 100%;
+      }
+
+      .name {
+        margin-left: 0.2rem;
+        padding: 0 0.4rem;
+        border-radius: 0.5rem;
+      }
+
+      .logout {
+        height: 2rem;
+        width: 2rem;
+      }
+
+      .login {
+        left: 0;
+        padding: 0 0.4rem;
+        border-radius: 0.5rem;
+
+        :hover {
+          background-color: #48d;
+        }
+      }
+    }
+
+    .discord-login {
+      height: 1rem;
+    }
+  }
+
+  .content {
+    padding: 3rem;
+  }
+}
+
+.blueprint {
+  display: grid;
+  grid-template-rows: 10rem 24rem 16rem;
+  grid-template-columns: 4fr 2fr;
+  gap: 1.25em;
+
+  div {
+    background-color: #ccc;
+    border-radius: 0.5rem;
+    padding: 1rem;
+  }
+
+  div::-webkit-scrollbar {
+    width: 20px;
+  }
+
+  div::-webkit-scrollbar-thumb {
+    background-color: #555;
+    background-clip: padding-box;
+    border-radius: 10px;
+    border: 5px solid rgba(0, 0, 0, 0);
+  }
+
+  .viewport {
+    grid-area: span 2 / span 1;
+  }
+
+  .stats {
+    grid-area: span 1 / span 1;
+
+    .list {
+      margin: -0.25rem 0;
+      padding: 0;
+      font-size: inherit;
+    }
+
+    .title {
+      font-weight: bold;
+      padding-right: 1rem;
+
+      &::after {
+        content: ':';
+      }
+    }
+  }
+
+  .description {
+    grid-area: span 1 / span 1;
+    overflow-y: auto;
+
+    p {
+      margin: 0;
+    }
+
+    p + p {
+      margin-top: 1rem;
+    }
+  }
+
+  .forks {
+    grid-area: span 1 / span 1;
+  }
+
+  .export {
+    grid-area: span 1 / span 1;
+  }
+}
