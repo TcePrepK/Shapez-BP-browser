@@ -5,6 +5,7 @@ const router = express.Router();
 const Blueprint = require('../blueprint/blueprint');
 
 const exampleBps = require('../config/exampleBlueprints.json');
+const{ renderBlueprint } = require('../public/javascripts/render');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

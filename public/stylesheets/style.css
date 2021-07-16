@@ -1,5 +1,9 @@
 :root {
   font: Calibri, Arial, sans-serif;
+  --nav-color: #6af;
+  --nav-hover-color: #48d;
+  --container-color: #ccc;
+  --black-theme-shapez: #3e3f47;
 }
 
 body {
@@ -18,7 +22,7 @@ a {
   z-index: 999;
   padding: 0.5rem 2rem;
   margin-bottom: 1.5rem;
-  background-color: #6af;
+  background-color: var(--nav-color);
   color: #fff;
 }
 .navbar-root::after {
@@ -71,8 +75,8 @@ a {
   padding: 0 0.4rem;
   border-radius: 0.5rem;
 }
-.navbar-root .container .nav :hover {
-  background-color: #48d;
+.navbar-root .container .nav .link:hover {
+  background-color: var(--nav-hover-color);
 }
 .navbar-root .container .user {
   display: block;
@@ -80,8 +84,8 @@ a {
   font-size: 1.75rem;
   white-space: nowrap;
 }
-.navbar-root .container .user :hover img {
-  background-color: #48d;
+.navbar-root .container .user:hover img {
+  background-color: var(--nav-hover-color);
 }
 .navbar-root .container .user .avatar {
   position: relative;
@@ -106,8 +110,8 @@ a {
   padding: 0 0.4rem;
   border-radius: 0.5rem;
 }
-.navbar-root .container .user .login :hover {
-  background-color: #48d;
+.navbar-root .container .user .login:hover {
+  background-color: var(--nav-hover-color);
 }
 .navbar-root .container .discord-login {
   height: 1rem;
@@ -118,12 +122,13 @@ a {
 
 .blueprint {
   display: grid;
-  grid-template-rows: 10rem 24rem 16rem;
-  grid-template-columns: 4fr 2fr;
+  grid-template-rows: 10rem 15rem 16rem;
+  grid-template-columns: 3fr 3fr;
   gap: 1.25em;
+  padding: 0 1.25rem;
 }
 .blueprint div {
-  background-color: #ccc;
+  background-color: var(--container-color);
   border-radius: 0.5rem;
   padding: 1rem;
 }
@@ -169,6 +174,60 @@ a {
 }
 .blueprint .export {
   grid-area: span 1/span 1;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-rows: 2.5rem 11.5rem;
+}
+.blueprint .export .nav {
+  background-color: var(--black-theme-shapez);
+  display: inline-flex;
+  flex-flow: row nowrap;
+  position: relative;
+  padding: 0.25rem 1.25rem 0.01rem 1.25rem;
+  margin: 0;
+  white-space: nowrap;
+  border-radius: 0.5rem 0.5rem 0 0;
+  text-align: center;
+}
+.blueprint .export .nav > * {
+  padding: 0 1rem;
+  font-size: 1.5rem;
+  border: none;
+  color: #fff;
+}
+.blueprint .export .nav .copy {
+  background-color: var(--nav-color);
+}
+.blueprint .export .nav .copy:hover {
+  background-color: var(--nav-hover-color);
+}
+.blueprint .export .nav .name {
+  background-color: var(--container-color);
+  padding: 0 0.5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.blueprint .export .nav .json {
+  background-color: var(--nav-color);
+}
+.blueprint .export .nav .json:hover {
+  background-color: var(--nav-hover-color);
+}
+.blueprint .export .data {
+  grid-area: span 1/span 1;
+  word-break: break-all;
+  width: calc(100% - 2rem);
+  height: 100%;
+  overflow-y: auto;
+  width: auto;
+  padding-right: 0rem;
+}
+.blueprint .export .data .item {
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+  font-size: 1.25rem;
 }
 
 /*# sourceMappingURL=style.css.map */

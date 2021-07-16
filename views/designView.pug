@@ -24,4 +24,10 @@ block content
       each paragraph in description
         p #{paragraph}
     div.forks Fork//todo
-    div.export Export//todo
+    div.export
+      ul.nav
+        button.copy#blueprintCopy Copy
+        a.name #{title}
+        button.json#blueprintData JSON
+      div.data
+        p.item #{bpString}

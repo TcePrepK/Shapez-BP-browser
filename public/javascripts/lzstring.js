@@ -303,3 +303,7 @@ var LZString = (function () {
       return LZString;
     })
   : 'undefined' != typeof module && null != module && (module.exports = LZString);
+
+module.exports = {
+  LZString,
+}

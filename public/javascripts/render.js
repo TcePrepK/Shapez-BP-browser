@@ -1,3 +1,6 @@
+const{ LZString } = require('./lzstring');
+const BUILDINGS = require('./building.json');
+
 const TILE_SIZE = 96;
 const TILE_OVERLAP = 6;
 const POST_SCALE = 0.75;
@@ -296,4 +299,8 @@ function drawSprite(ctx, name, x, y, rot) {
 
   ctx.rotate(-ctxR);
   ctx.translate(-ctxX, -ctxY);
+}
+
+module.exports = {
+  renderBlueprint
 }
