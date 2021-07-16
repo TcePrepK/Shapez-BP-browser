@@ -1,0 +1,27 @@
+extends layout.pug
+
+block scripts
+
+block content
+  div.blueprint
+    div.bp-viewport Viewer//todo
+      canvas#render
+    div.bp-stats
+      table.stats-list
+        tr#stat-dimensions
+          td.stat-title Dimensions
+          td.stat-value #{stats.width}×#{stats.height}
+        tr#stat-belts
+          td.stat-title Belts
+          td.stat-value #{stats.belts}
+        tr#stat-buildings
+          td.stat-title Buildings
+          td.stat-value #{stats.buildings}
+        tr#stat-level
+          td.stat-title Min. level
+          td.stat-value #{stats.minLevel}
+    div.bp-description
+      each paragraph in description
+        p #{paragraph}
+    div.bp-forks Fork//todo
+    div.bp-export Export//todo

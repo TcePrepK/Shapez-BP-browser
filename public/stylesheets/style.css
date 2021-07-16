@@ -1,27 +1,185 @@
+:root {
+  font: Calibri, Arial, sans-serif;
+}
+
 body {
-  padding: 50px;
-  background-color: #DEE1EA;
-  font: 14px Helvetica, Arial, sans-serif;
+  background-color: #ddd;
+  
+  margin: 0;
+  
+  color: #000;
+  font: 1.5rem Calibri, Arial, sans-serif;
 }
 
-#viewer {
-  border: solid 4px #156A8C;
+a {
+  text-decoration: none;
 }
 
-#blueprint {
-  padding: 10px;
+.navbar-root {
+  position: relative;
+  z-index: 999;
   
-  margin: 10px 0px;
+  padding: 0.5rem 2rem;
+  margin-bottom: 1.5rem;
   
-  width: 60%;
-  height: 100px;
+  background-color: #6af;
   
-  word-break: break-all;
-  overflow-y: scroll;
+  color: #fff;
+}
+.navbar-root::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.navbar-root a {
+  color: inherit;
+}
+.navbar-container {
+  max-width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: baseline;
+}
+.navbar-container::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.navbar-brand {
+  display: block;
+  margin-left: -0.5rem;
   
-  color: #DEE1EA;
-  background-color: #3E3F47;
-  font: 12px Consolas, monospace;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.navbar-brand:hover {
   
-  border: solid 4px #156A8C;
+}
+.navbar-brand img {
+  position: absolute;
+  top: 0.6rem;
+  height: 4rem;
+  width: 4rem;
+}
+.navbar-brand span {
+  padding-left: 5rem;
+}
+.navbar-nav {
+  display: inline-flex;
+  flex-flow: row nowrap;
+  
+  padding: 0 2rem;
+  margin: 0;
+  
+  list-style: none;
+}
+.nav-item {
+  padding: 0 1rem;
+  
+  font-size: 1.75rem;
+}
+.nav-link {
+  padding: 0 0.4rem;
+  border-radius: 0.5rem;
+}
+.nav-link:hover {
+  background-color: #48d;
+}
+.nav-user {
+  display: block;
+  margin-left: auto;
+  
+  font-size: 1.75rem;
+}
+.nav-user:hover img {
+  background-color: #48d;
+}
+.user-avatar {
+  position: relative;
+  top: 0.3rem;
+  margin: -0.3rem 0;
+  height: 2rem;
+  width: 2rem;
+  padding: 0.2rem;
+  border-radius: 100%;
+}
+.user-name {
+  margin-left: 0.2rem;
+  padding: 0 0.4rem;
+  border-radius: 0.5rem;
+}
+.user-logout {
+  height: 2rem;
+  width: 2rem;
+}
+.nav-login {
+  left: 0;
+  padding: 0 0.4rem;
+  border-radius: 0.5rem;
+}
+.nav-login:hover {
+  background-color: #48d;
+}
+.discord-login {
+  height: 1rem;
+}
+.content {
+  padding: 3rem;
+}
+.blueprint {
+  display: grid;
+  grid-template-rows: 10rem 24rem 16rem;
+  grid-template-columns: 4fr 2fr;
+  gap: 1.25em;
+}
+.blueprint div {
+  background-color: #ccc;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+.blueprint div::-webkit-scrollbar {
+  width: 20px;
+}
+.blueprint div::-webkit-scrollbar-thumb {
+  background-color: #555;
+  background-clip: padding-box;
+  border-radius: 10px;
+  border: 5px solid rgba(0, 0, 0, 0);
+}
+.bp-viewport {
+  grid-area: span 2 / span 1;
+}
+.bp-stats {
+  grid-area: span 1 / span 1;
+}
+.stats-list {
+  margin: -0.25rem 0;
+  padding: 0;
+  font-size: inherit;
+}
+.stats-list tr {
+  
+}
+.stat-title {
+  font-weight: bold;
+  padding-right: 1rem;
+}
+.stat-title::after {
+  content: ":";
+}
+.stat-value {
+  
+}
+.bp-description {
+  grid-area: span 1 / span 1;
+  overflow-y: auto;
+}
+.bp-description p {
+  margin-top: 0;
+}
+.bp-forks {
+  grid-area: span 1 / span 1;
+}
+.bp-export {
+  grid-area: span 1 / span 1;
 }

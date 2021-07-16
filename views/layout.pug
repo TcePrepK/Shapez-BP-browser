@@ -1,0 +1,34 @@
+html
+  head
+    title #{title} - Shapez.bp
+    link(rel='stylesheet' href='/stylesheets/style.css')
+    block scripts
+  body
+    nav.navbar-root
+      div.navbar-container
+        a.navbar-brand(href='/')
+          img(src='/images/logo.png')
+          span Shapez.bp
+        ul.navbar-nav
+          li.nav-item
+            a.nav-link#indexNew(href='/explore/new') New
+          li.nav-item
+            a.nav-link#indexTop(href='/explore/top') Top
+          if user
+            li.nav-item
+              a.nav-link#indexUser(href='/user/book') My book
+            li.nav-item
+              a.nav-link#userCreate(href='/create') Create
+        if user
+          a.nav-user(href='/user')
+            img.user-avatar(src=user.avatar)
+            span.user-name #{user.name}
+        else
+          a.nav-user(href='/login')
+            span.nav-login
+              svg.discord-login(viewbox='0 0 73 57')
+                use(xlink:href='/images/discord.svg#logo')
+              |  Log In
+    main.content
+      block content
+    
