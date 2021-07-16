@@ -12,7 +12,7 @@ class Building {
   }
 
   farCorner(rotation) {
-    switch (rotation) {
+    switch(rotation) {
       case 0:
         return {
           x: this.width - 1,
@@ -42,7 +42,7 @@ const defsByName = new Map();
 
 buildingDefs.forEach(entry => {
   const building = new Building(entry);
-  if (building.code !== -1) {
+  if(building.code !== -1) {
     defsByCode.set(building.code, building);
   }
   defsByName.set(building.internal, building);

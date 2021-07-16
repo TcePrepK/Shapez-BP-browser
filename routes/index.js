@@ -1,4 +1,4 @@
-const { Buffer } = require('buffer');
+const{ Buffer } = require('buffer');
 const express = require('express');
 const router = express.Router();
 
@@ -12,7 +12,7 @@ router.get('/', function (req, res, next) {
 });
 router.get('/:id', function (req, res, next) {
   let bp = exampleBps.blueprints.find(b => b.url === req.params.id);
-  if (bp) {
+  if(bp) {
     const user = {
       name: 'SkimnerPhi',
       avatar:

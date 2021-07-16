@@ -9,7 +9,7 @@ const POST_SCALE = 4;
 const TILE_REAL_SIZE = TILE_SIZE - 2 * TILE_OVERLAP;
 
 function renderBlueprint(bpString, bgStyle = BG_DARK) {
-  if (!bpString) {
+  if(!bpString) {
     bpString = document.getElementById('blueprint').innerText;
   }
   let blueprint = parseBlueprintString(bpString);
@@ -29,16 +29,16 @@ function parseBlueprintString(bp) {
   let maxX = Number.MIN_SAFE_INTEGER,
     maxY = Number.MIN_SAFE_INTEGER;
 
-  for (let idx = 0; idx < blueprint.length; idx++) {
+  for(let idx = 0; idx < blueprint.length; idx++) {
     const code = blueprint[idx].components.StaticMapEntity.code;
 
-    if (code === BUILDINGS.beltStraight.code) {
+    if(code === BUILDINGS.beltStraight.code) {
       continue;
     }
-    if (code === BUILDINGS.wireBlStraight.code) {
+    if(code === BUILDINGS.wireBlStraight.code) {
       continue;
     }
-    if (code === BUILDINGS.wireGrStraight.code) {
+    if(code === BUILDINGS.wireGrStraight.code) {
       continue;
     }
 
@@ -46,7 +46,7 @@ function parseBlueprintString(bp) {
 
     const name = Object.keys(BUILDINGS).find(k => BUILDINGS[k].code === code);
 
-    let [cornerX, cornerY] = translate(
+    let[cornerX, cornerY] = translate(
       coords.x,
       coords.y,
       blueprint[idx].components.StaticMapEntity.rotation / 90,
@@ -65,19 +65,19 @@ function parseBlueprintString(bp) {
 
   // Initialize map grid
   let ret = new Array(maxY - minY + 3);
-  for (let y = 0; y < ret.length; y++) {
+  for(let y = 0; y < ret.length; y++) {
     ret[y] = new Array(maxX - minX + 3);
   }
   ret.w = maxX - minX + 3;
   ret.h = maxY - minY + 3;
 
   // Second pass to populate map grid
-  for (let idx = 0; idx < blueprint.length; idx++) {
+  for(let idx = 0; idx < blueprint.length; idx++) {
     const code = blueprint[idx].components.StaticMapEntity.code;
     const coords = blueprint[idx].components.StaticMapEntity.origin;
     const entity = blueprint[idx].components.StaticMapEntity;
     const name = Object.keys(BUILDINGS).find(k => BUILDINGS[k].code === code);
-    const [cornerX, cornerY] = translate(
+    const[cornerX, cornerY] = translate(
       coords.x,
       coords.y,
       entity.rotation / 90,
@@ -89,14 +89,14 @@ function parseBlueprintString(bp) {
     const minY = Math.min(entity.origin.y, cornerY);
     const maxX = Math.max(entity.origin.x, cornerX);
     const maxY = Math.max(entity.origin.y, cornerY);
-    for (let y = minY; y <= maxY; y++) {
-      for (let x = minX; x <= maxX; x++) {
+    for(let y = minY; y <= maxY; y++) {
+      for(let x = minX; x <= maxX; x++) {
         let arrX = x - offsetX;
         let arrY = y - offsetY;
-        if (arrX < 0 || arrX >= ret.w || arrY < 0 || arrY >= ret.h) {
+        if(arrX < 0 || arrX >= ret.w || arrY < 0 || arrY >= ret.h) {
           continue;
         }
-        if (x === entity.origin.x && y === entity.origin.y) {
+        if(x === entity.origin.x && y === entity.origin.y) {
           ret[arrY][arrX] = {
             name,
             rotation: entity.rotation / 90,
@@ -115,49 +115,49 @@ function parseBlueprintString(bp) {
   return ret;
 }
 function drawBelts(ctx, blueprint) {
-  for (let y = 0; y < blueprint.h; y++) {
-    for (let x = 0; x < blueprint.w; x++) {
-      if (!blueprint[y][x]) {
+  for(let y = 0; y < blueprint.h; y++) {
+    for(let x = 0; x < blueprint.w; x++) {
+      if(!blueprint[y][x]) {
         continue;
       }
 
       const name = blueprint[y][x].name;
-      if (name === 'child') {
+      if(name === 'child') {
         continue;
       }
-      if (name.startsWith('belt') || name.startsWith('wire')) {
+      if(name.startsWith('belt') || name.startsWith('wire')) {
         drawSprite(ctx, name, x, y, blueprint[y][x].rotation);
         continue;
       }
-      for (let idx = 0; idx < BUILDINGS[name].links.length; idx++) {
+      for(let idx = 0; idx < BUILDINGS[name].links.length; idx++) {
         const link = BUILDINGS[name].links[idx];
 
-        if (!link.draw) {
+        if(!link.draw) {
           continue;
         }
 
-        let [selfLinkX, selfLinkY] = translate(x, y, blueprint[y][x].rotation, link.i, link.j);
+        let[selfLinkX, selfLinkY] = translate(x, y, blueprint[y][x].rotation, link.i, link.j);
 
         const selfFacing = (blueprint[y][x].rotation + link.facing) % 4;
 
-        let [neighborX, neighborY] = neighborCoords(selfLinkX, selfLinkY, selfFacing);
+        let[neighborX, neighborY] = neighborCoords(selfLinkX, selfLinkY, selfFacing);
 
-        if (neighborX < 0 || neighborX >= blueprint.w || neighborY < 0 || neighborY >= blueprint.h) {
+        if(neighborX < 0 || neighborX >= blueprint.w || neighborY < 0 || neighborY >= blueprint.h) {
           continue;
         }
         let neighbor = blueprint[neighborY][neighborX];
-        if (!neighbor) {
+        if(!neighbor) {
           continue;
         }
-        if (neighbor.name === 'child') {
+        if(neighbor.name === 'child') {
           neighborX = neighbor.x;
           neighborY = neighbor.y;
           neighbor = blueprint[neighborY][neighborX];
         }
-        for (let nIdx = 0; nIdx < BUILDINGS[neighbor.name].links.length; nIdx++) {
+        for(let nIdx = 0; nIdx < BUILDINGS[neighbor.name].links.length; nIdx++) {
           const nLink = BUILDINGS[neighbor.name].links[nIdx];
 
-          let [neighborLinkX, neighborLinkY] = translate(
+          let[neighborLinkX, neighborLinkY] = translate(
             neighborX,
             neighborY,
             blueprint[y][x].rotation,
@@ -165,16 +165,16 @@ function drawBelts(ctx, blueprint) {
             nLink.j
           );
 
-          if (neighborX !== neighborLinkX || neighborY !== neighborLinkY) {
+          if(neighborX !== neighborLinkX || neighborY !== neighborLinkY) {
             continue;
           }
 
           const nAdjFacing = (neighbor.rotation + nLink.facing + 2) % 4;
 
-          if (selfFacing === nAdjFacing) {
-            if (link.type === 'beltIn' && nLink.type === 'beltOut') {
+          if(selfFacing === nAdjFacing) {
+            if(link.type === 'beltIn' && nLink.type === 'beltOut') {
               drawSprite(ctx, 'beltIn', selfLinkX, selfLinkY, selfFacing);
-            } else if (link.type === 'beltOut' && nLink.type === 'beltIn') {
+            } else if(link.type === 'beltOut' && nLink.type === 'beltIn') {
               drawSprite(ctx, 'beltOut', selfLinkX, selfLinkY, selfFacing);
             }
           }
@@ -185,14 +185,14 @@ function drawBelts(ctx, blueprint) {
 }
 
 function drawBuildings(ctx, blueprint) {
-  for (let y = 0; y < blueprint.h; y++) {
-    for (let x = 0; x < blueprint.w; x++) {
-      if (!blueprint[y][x]) {
+  for(let y = 0; y < blueprint.h; y++) {
+    for(let x = 0; x < blueprint.w; x++) {
+      if(!blueprint[y][x]) {
         continue;
       }
 
       const name = blueprint[y][x].name;
-      if (name === 'child' || name.startsWith('belt') || name.startsWith('wire')) {
+      if(name === 'child' || name.startsWith('belt') || name.startsWith('wire')) {
         continue;
       }
 
@@ -202,7 +202,7 @@ function drawBuildings(ctx, blueprint) {
 }
 
 function translate(x, y, r, i, j) {
-  switch (r) {
+  switch(r) {
     case 0:
       return [x + i, y - j];
     case 1:
@@ -214,7 +214,7 @@ function translate(x, y, r, i, j) {
   }
 }
 function neighborCoords(x, y, facing) {
-  switch (facing) {
+  switch(facing) {
     case 0:
       return [x, y - 1];
     case 1:
@@ -248,7 +248,7 @@ function initCanvas(width, height, bgMode) {
 
   let ctx = c.getContext('2d');
 
-  if (bgMode !== BG_NONE) {
+  if(bgMode !== BG_NONE) {
     ctx.fillStyle = BG_COLORS.background[bgMode];
     ctx.strokeStyle = BG_COLORS.gridLines[bgMode];
     ctx.lineWidth = LINE_WIDTH;
@@ -257,11 +257,11 @@ function initCanvas(width, height, bgMode) {
 
     ctx.beginPath();
 
-    for (let row = 1; row < width; row++) {
+    for(let row = 1; row < width; row++) {
       ctx.moveTo(TILE_REAL_SIZE * row, 0);
       ctx.lineTo(TILE_REAL_SIZE * row, pxHeight);
     }
-    for (let col = 1; col < height; col++) {
+    for(let col = 1; col < height; col++) {
       ctx.moveTo(0, TILE_REAL_SIZE * col);
       ctx.lineTo(pxWidth, TILE_REAL_SIZE * col);
     }

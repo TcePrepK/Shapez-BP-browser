@@ -4,9 +4,9 @@
 
 body {
   background-color: #ddd;
-  
+
   margin: 0;
-  
+
   color: #000;
   font: 1.5rem Calibri, Arial, sans-serif;
 }
@@ -18,16 +18,16 @@ a {
 .navbar-root {
   position: relative;
   z-index: 999;
-  
+
   padding: 0.5rem 2rem;
   margin-bottom: 1.5rem;
-  
+
   background-color: #6af;
-  
+
   color: #fff;
 }
 .navbar-root::after {
-  content: "";
+  content: '';
   display: table;
   clear: both;
 }
@@ -41,19 +41,18 @@ a {
   align-items: baseline;
 }
 .navbar-container::after {
-  content: "";
+  content: '';
   display: table;
   clear: both;
 }
 .navbar-brand {
   display: block;
   margin-left: -0.5rem;
-  
+
   font-size: 2rem;
   font-weight: bold;
 }
 .navbar-brand:hover {
-  
 }
 .navbar-brand img {
   position: absolute;
@@ -67,15 +66,15 @@ a {
 .navbar-nav {
   display: inline-flex;
   flex-flow: row nowrap;
-  
+
   padding: 0 2rem;
   margin: 0;
-  
+
   list-style: none;
 }
 .nav-item {
   padding: 0 1rem;
-  
+
   font-size: 1.75rem;
 }
 .nav-link {
@@ -88,7 +87,7 @@ a {
 .nav-user {
   display: block;
   margin-left: auto;
-  
+
   font-size: 1.75rem;
 }
 .nav-user:hover img {
@@ -158,17 +157,15 @@ a {
   font-size: inherit;
 }
 .stats-list tr {
-  
 }
 .stat-title {
   font-weight: bold;
   padding-right: 1rem;
 }
 .stat-title::after {
-  content: ":";
+  content: ':';
 }
 .stat-value {
-  
 }
 .bp-description {
   grid-area: span 1 / span 1;
