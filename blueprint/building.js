@@ -5,6 +5,7 @@ class Building {
     this.code = entry.code;
     this.internal = entry.internal;
     this.name = entry.name;
+    this.level = entry.level;
     this.width = entry.width;
     this.height = entry.height;
     this.links = entry.links;

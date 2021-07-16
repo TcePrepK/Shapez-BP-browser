@@ -102,6 +102,24 @@ class Blueprint {
     }, []);
   }
   
+  get stats() {
+    return this.buildings.reduce((acc, building) => {
+      acc.minLevel = Math.max(acc.minLevel, building.type.level);
+      if(building.type.internal.startsWith('belt')) {
+        acc.belts++;
+      } else {
+        acc.buildings++;
+      }
+      return acc;
+    }, {
+      height: this.height - 2,
+      width: this.width - 2,
+      belts: 0,
+      buildings: 0,
+      minLevel: 0
+    });
+  }
+  
   static importBinary(data) {
     let buildings = [];
     let offset = 0;
