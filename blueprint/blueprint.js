@@ -335,10 +335,10 @@ class Blueprint {
     return json;
   }
 
-  static importSenseBP(senseBP) {
-    return Blueprint.importJSON(JSON.parse(LZString.decompressFromEncodedURIComponent(senseBP)));
+  static importShrimpBP(shrimpBP) {
+    return Blueprint.importJSON(JSON.parse(LZString.decompressFromEncodedURIComponent(shrimpBP)));
   }
-  exportSenseBP() {
+  exportShrimpBP() {
     return LZString.compressToEncodedURIComponent(JSON.stringify(this.exportJSON()));
   }
 }

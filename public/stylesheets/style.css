@@ -4,6 +4,7 @@
   --nav-hover-color: #48d;
   --container-color: #ccc;
   --black-theme-shapez: #3e3f47;
+  --gap-between-containers: 2.5rem;
 }
 
 body {
@@ -18,17 +19,15 @@ a {
 }
 
 .navbar-root {
-  position: relative;
+  position: sticky;
   z-index: 999;
+  width: auto;
+  left: 0;
+  top: 0;
   padding: 0.5rem 2rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--gap-between-containers);
   background-color: var(--nav-color);
   color: #fff;
-}
-.navbar-root::after {
-  content: "";
-  display: table;
-  clear: both;
 }
 .navbar-root a {
   color: inherit;
@@ -38,21 +37,17 @@ a {
   display: flex;
   flex-flow: row nowrap;
   align-items: baseline;
-}
-.navbar-root .container::after {
-  content: "";
-  display: table;
-  clear: both;
+  position: relative;
 }
 .navbar-root .container .brand {
   display: block;
-  margin-left: -0.5rem;
+  margin-left: -1.5rem;
   font-size: 2rem;
   font-weight: bold;
 }
 .navbar-root .container .brand img {
   position: absolute;
-  top: 0.6rem;
+  top: 0.25rem;
   height: 4rem;
   width: 4rem;
 }
@@ -84,9 +79,6 @@ a {
   font-size: 1.75rem;
   white-space: nowrap;
 }
-.navbar-root .container .user:hover img {
-  background-color: var(--nav-hover-color);
-}
 .navbar-root .container .user .avatar {
   position: relative;
   top: 0.3rem;
@@ -96,14 +88,17 @@ a {
   padding: 0.2rem;
   border-radius: 100%;
 }
+.navbar-root .container .user .avatar:hover {
+  background-color: var(--nav-hover-color);
+}
 .navbar-root .container .user .name {
-  margin-left: 0.2rem;
-  padding: 0 0.4rem;
+  padding-right: 0.75rem;
   border-radius: 0.5rem;
 }
 .navbar-root .container .user .logout {
-  height: 2rem;
-  width: 2rem;
+  margin-bottom: -0.2rem;
+  height: 1.5rem;
+  width: 1.5rem;
 }
 .navbar-root .container .user .login {
   left: 0;
@@ -120,12 +115,31 @@ a {
   padding: 3rem;
 }
 
+.header {
+  padding: 0 var(--gap-between-containers);
+  height: 4rem;
+  margin: 3rem 0 0 0;
+}
+.header .title {
+  font-weight: 900;
+  font-size: 2.5rem;
+}
+.header .line {
+  height: 0.1rem;
+  background-color: var(--black-theme-shapez);
+}
+.header .author {
+  font-weight: 800;
+  font-size: 1.75rem;
+  color: var(--nav-color);
+}
+
 .blueprint {
   display: grid;
-  grid-template-rows: 10rem 15rem 16rem;
+  grid-template-rows: 10rem 15rem 14rem;
   grid-template-columns: 3fr 3fr;
-  gap: 1.25em;
-  padding: 0 1.25rem;
+  gap: var(--gap-between-containers);
+  padding: var(--gap-between-containers);
 }
 .blueprint div {
   background-color: var(--container-color);
@@ -184,20 +198,23 @@ a {
   display: inline-flex;
   flex-flow: row nowrap;
   position: relative;
-  padding: 0.25rem 1.25rem 0.01rem 1.25rem;
+  padding: 0.25rem 0.5rem 0.01rem 0.5rem;
   margin: 0;
   white-space: nowrap;
   border-radius: 0.5rem 0.5rem 0 0;
   text-align: center;
 }
 .blueprint .export .nav > * {
-  padding: 0 1rem;
+  padding: 0 0.5rem;
   font-size: 1.5rem;
   border: none;
   color: #fff;
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 .blueprint .export .nav .copy {
+  height: calc(100% - 0.25rem);
   background-color: var(--nav-color);
+  border-radius: 0.5rem;
 }
 .blueprint .export .nav .copy:hover {
   background-color: var(--nav-hover-color);
@@ -206,7 +223,6 @@ a {
   background-color: var(--container-color);
   padding: 0 0.5rem;
   margin-left: auto;
-  margin-right: auto;
 }
 .blueprint .export .nav .json {
   background-color: var(--nav-color);
@@ -218,16 +234,15 @@ a {
   grid-area: span 1/span 1;
   word-break: break-all;
   width: calc(100% - 2rem);
-  height: 100%;
   overflow-y: auto;
   width: auto;
   padding-right: 0rem;
+  font-family: monospace;
 }
 .blueprint .export .data .item {
   margin: 0;
   padding: 0;
-  font-weight: 500;
-  font-size: 1.25rem;
+  font-size: 1.3rem;
 }
 
 /*# sourceMappingURL=style.css.map */

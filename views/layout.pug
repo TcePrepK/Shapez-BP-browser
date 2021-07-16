@@ -23,12 +23,17 @@ html
           a.user(href='/user')
             img.avatar(src=user.avatar)
             span.name #{user.name}
+            img.logout(src='/images/logout.svg#logout')
         else
           a.user(href='/login')
             span.login
               svg.discord-login(viewbox='0 0 73 57')
                 use(xlink:href='/images/discord.svg#logo')
               |  Log In
+    div.header
+      a.title #{title}
+      div.line
+      a.author #{author}
     main.content
       block content
     
