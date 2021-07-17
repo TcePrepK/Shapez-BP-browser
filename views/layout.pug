@@ -23,6 +23,7 @@ html
           a.user(href='/user')
             img.avatar(src=user.avatar)
             span.name #{user.name}
+          a.user-logout(href='/logout')
             img.logout(src='/images/logout.svg#logout')
         else
           a.user(href='/login')

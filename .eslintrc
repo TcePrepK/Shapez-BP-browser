@@ -30,6 +30,8 @@
         "quotes": [2, "single", { "avoidEscape": true }],
         "@typescript-eslint/no-var-requires": 0,
         "@typescript-eslint/keyword-spacing": ["error", { "after": false, "overrides": { "return": { "after": true }, "else": { "after": true } } } ],
+        "no-multi-spaces": "error",
+        "no-multiple-empty-lines": ["error", { "max": 1 }],
         "keyword-spacing": "off",
         "curly": "error",
         "no-trailing-spaces": "error",

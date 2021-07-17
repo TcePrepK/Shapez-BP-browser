@@ -5,6 +5,8 @@
   --container-color: #ccc;
   --black-theme-shapez: #3e3f47;
   --gap-between-containers: 2.5rem;
+  --json-color: #48d;
+  --shrimpBP-color: #ccc;
 }
 
 body {
@@ -66,12 +68,21 @@ a {
   padding: 0 1rem;
   font-size: 1.75rem;
 }
+.navbar-root .container .nav .item:hover {
+  transform: translateY(-1px);
+}
+.navbar-root .container .nav .item:active {
+  transform: translateY(1px);
+}
 .navbar-root .container .nav .link {
   padding: 0 0.4rem;
   border-radius: 0.5rem;
 }
 .navbar-root .container .nav .link:hover {
-  background-color: var(--nav-hover-color);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.navbar-root .container .nav .link:active {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px 0px inset;
 }
 .navbar-root .container .user {
   display: block;
@@ -83,22 +94,23 @@ a {
   position: relative;
   top: 0.3rem;
   margin: -0.3rem 0;
+  padding: 0.2rem;
   height: 2rem;
   width: 2rem;
-  padding: 0.2rem;
   border-radius: 100%;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 .navbar-root .container .user .avatar:hover {
   background-color: var(--nav-hover-color);
 }
-.navbar-root .container .user .name {
-  padding-right: 0.75rem;
-  border-radius: 0.5rem;
+.navbar-root .container .user .avatar:active {
+  transform: translateY(1px);
+  box-shadow: none;
 }
-.navbar-root .container .user .logout {
-  margin-bottom: -0.2rem;
-  height: 1.5rem;
-  width: 1.5rem;
+.navbar-root .container .user .name {
+  margin-left: 0.2rem;
+  padding-right: 0.5rem;
+  border-radius: 0.5rem;
 }
 .navbar-root .container .user .login {
   left: 0;
@@ -107,6 +119,23 @@ a {
 }
 .navbar-root .container .user .login:hover {
   background-color: var(--nav-hover-color);
+}
+.navbar-root .container .user-logout .logout {
+  margin-bottom: -0.3rem;
+  margin-left: 0.15rem;
+  padding: 0.1rem;
+  padding-left: 0.2rem;
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 0.25rem;
+}
+.navbar-root .container .user-logout .logout:hover {
+  transform: translateY(-1px);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.navbar-root .container .user-logout .logout:active {
+  transform: translateY(1px);
+  box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px 0 inset;
 }
 .navbar-root .container .discord-login {
   height: 1rem;
@@ -160,6 +189,7 @@ a {
 }
 .blueprint .stats {
   grid-area: span 1/span 1;
+  margin-left: auto;
 }
 .blueprint .stats .list {
   margin: -0.25rem 0;
@@ -176,6 +206,7 @@ a {
 .blueprint .description {
   grid-area: span 1/span 1;
   overflow-y: auto;
+  padding-top: 0.75rem;
 }
 .blueprint .description p {
   margin: 0;
@@ -197,38 +228,67 @@ a {
   background-color: var(--black-theme-shapez);
   display: inline-flex;
   flex-flow: row nowrap;
-  position: relative;
-  padding: 0.25rem 0.5rem 0.01rem 0.5rem;
   margin: 0;
+  padding: 0.25rem 0.5rem 0rem 0.5rem;
   white-space: nowrap;
   border-radius: 0.5rem 0.5rem 0 0;
   text-align: center;
 }
 .blueprint .export .nav > * {
-  padding: 0 0.5rem;
   font-size: 1.5rem;
   border: none;
   color: #fff;
-  border-radius: 0.5rem 0.5rem 0 0;
 }
 .blueprint .export .nav .copy {
   height: calc(100% - 0.25rem);
   background-color: var(--nav-color);
+  padding: 0 0.5rem;
   border-radius: 0.5rem;
 }
 .blueprint .export .nav .copy:hover {
   background-color: var(--nav-hover-color);
 }
-.blueprint .export .nav .name {
-  background-color: var(--container-color);
-  padding: 0 0.5rem;
-  margin-left: auto;
+.blueprint .export .nav .copy:active {
+  background-color: var(--nav-hover-color);
 }
-.blueprint .export .nav .json {
+.blueprint .export .nav .stringType {
+  background-color: var(--black-theme-shapez);
+  position: relative;
+  margin-left: auto;
+  padding: 0;
+}
+.blueprint .export .nav .stringType > * {
+  padding: 0 0.5rem 0.45rem 0.5rem;
+  font-size: 1.5rem;
+  color: #fff;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+.blueprint .export .nav .stringType .string {
+  background-color: var(--shrimpBP-color);
+}
+.blueprint .export .nav .stringType .json {
+  background-color: var(--json-color);
+}
+.blueprint .export .nav .stringType .json:hover {
+  background-color: var(--nav-hover-color);
+}
+.blueprint .export .nav .stringType .json:active {
+  background-color: var(--nav-hover-color);
+}
+.blueprint .export .nav .stringType .stringTypeCB {
+  position: absolute;
+  margin: 0;
+  opacity: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.blueprint .export .nav .stringType .stringTypeCB:checked ~ .string {
   background-color: var(--nav-color);
 }
-.blueprint .export .nav .json:hover {
-  background-color: var(--nav-hover-color);
+.blueprint .export .nav .stringType .stringTypeCB:checked ~ .json {
+  background-color: var(--container-color);
 }
 .blueprint .export .data {
   grid-area: span 1/span 1;
