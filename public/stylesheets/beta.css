@@ -1,0 +1,55 @@
+body {
+  padding: 0 20px;
+  background-color: #ddd;
+  color: #000;
+  font: 16px Calibri, Arial, sans-serif;
+}
+#viewport {
+  margin: 20px auto;
+  width: 100%;
+  height: 80%;
+  background-color: #ccc;
+  border-radius: 8px;
+  cursor: grab;
+}
+#viewport:active {
+  cursor: grabbing;
+}
+#copy-render {
+  margin: 20px auto;
+  padding: 5px;
+  background-color: #6af;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+}
+#copy-render:hover {
+  background-color: #48d;
+}
+#blueprint-card {
+  margin: 20px auto;
+  width: 100%;
+  background-color: #ccc;
+  border-radius: 8px;
+}
+#blueprint-string {
+  padding: 10px;
+  height: 20%;
+  font: 12px Consolas, monospace;
+  overflow-wrap: break-word;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+#blueprint-string::-webkit-scrollbar {
+  width: 20px;
+}
+#blueprint-string::-webkit-scrollbar-thumb {
+  background-color: #555;
+  background-clip: padding-box;
+  border-radius: 10px;
+  border: 5px solid rgba(0, 0, 0, 0);
+}
+#blueprint-string::-webkit-scrollbar-corner {
+  background-color: rgba(0, 0, 0, 0);
+}

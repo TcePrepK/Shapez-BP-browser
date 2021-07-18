@@ -1,11 +1,12 @@
 html
   head
     title #{name} - Shapez.io Blueprint
-    link(rel='stylesheet' href='/stylesheets/style.css')
-    script(src='/javascripts/building.js')
-    script(src='/javascripts/render.js')
+    link(rel='stylesheet' href='/stylesheets/beta.css')
+    script(src='/javascripts/blueprint.js')
     script(src='/javascripts/lzstring.js')
-  body(onload='renderBlueprint()')
-    img(id='sprites' src='/images/sprites.png' style='display: none')
-    canvas(id='viewer')
-    div(id='blueprint') #{bpString}
+  body(onload='init()')
+    img#sprites(src='/resource/sprites.png' style='display: none')
+    canvas#viewport
+    div#blueprint-card
+      div#blueprint-string #{bpString}
+    a#copy-render Copy render
