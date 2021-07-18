@@ -43,7 +43,7 @@ const backgroundColors = {
 };
 const blueprintMargin = 1;
 
-var spritesheet, viewport, bpString;
+let  spritesheet, viewport, bpString;
 const defsByCode = new Map();
 const defsByName = new Map();
 
@@ -117,7 +117,7 @@ function ready(json) {
       mode.scaleBounds.max
     )
   };
-  var lastPos = null;
+  let  lastPos = null;
   viewport.addEventListener('mousedown', e => {
     e.preventDefault();
     lastPos = {x: e.offsetX, y: e.offsetY};
