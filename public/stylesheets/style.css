@@ -1,9 +1,9 @@
 :root {
   font: Calibri, Arial, sans-serif;
-  --nav-color: #6af;
-  --nav-hover-color: #48d;
-  --container-color: #ccc;
-  --black-theme-shapez: #3e3f47;
+  --blue: #6af;
+  --dark-blue: #48d;
+  --grey: #ccc;
+  --dar-grey: #555;
   --gap-between-containers: 2.5rem;
 }
 
@@ -26,7 +26,7 @@ a {
   top: 0;
   padding: 0.5rem 2rem;
   margin-bottom: var(--gap-between-containers);
-  background-color: var(--nav-color);
+  background-color: var(--blue);
   color: #fff;
 }
 .navbar-root a {
@@ -100,7 +100,7 @@ a {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 .navbar-root .container .user .avatar:hover {
-  background-color: var(--nav-hover-color);
+  background-color: var(--dark-blue);
 }
 .navbar-root .container .user .avatar:active {
   transform: translateY(1px);
@@ -117,7 +117,7 @@ a {
   border-radius: 0.5rem;
 }
 .navbar-root .container .user .login:hover {
-  background-color: var(--nav-hover-color);
+  background-color: var(--dark-blue);
 }
 .navbar-root .container .user-logout .logout {
   margin-bottom: -0.3rem;
@@ -146,20 +146,50 @@ a {
 .header {
   padding: 0 var(--gap-between-containers);
   height: 4rem;
-  margin: 3rem 0 0 0;
+  margin: 3rem 0 1.65rem 0;
 }
 .header .title {
   font-weight: 900;
   font-size: 2.5rem;
 }
+.header .icons {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin-top: -1rem;
+  float: right;
+  position: relative;
+}
+.header .icons > * .icon {
+  padding: 0.4rem;
+  filter: invert(66%) sepia(0%) saturate(62%) hue-rotate(145deg) brightness(93%) contrast(89%);
+}
+.header .icons .star .icon {
+  border-radius: 1rem;
+}
+.header .icons .star .clickbox {
+  position: absolute;
+  margin: 0;
+  left: 0.5rem;
+  z-index: 2;
+  opacity: 0;
+  width: 25%;
+  height: 100%;
+}
+.header .icons .star .clickbox:hover + .icon {
+  filter: invert(61%) sepia(31%) saturate(6001%) hue-rotate(192deg) brightness(89%) contrast(93%);
+}
+.header .icons .star .clickbox:checked + .icon {
+  filter: invert(68%) sepia(40%) saturate(7087%) hue-rotate(192deg) brightness(91%) contrast(90%);
+}
 .header .line {
   height: 0.1rem;
-  background-color: var(--black-theme-shapez);
+  background-color: var(--dar-grey);
 }
 .header .author {
   font-weight: 800;
   font-size: 1.75rem;
-  color: var(--nav-color);
+  color: var(--blue);
 }
 
 .blueprint {
@@ -170,7 +200,7 @@ a {
   padding: var(--gap-between-containers);
 }
 .blueprint div {
-  background-color: var(--container-color);
+  background-color: var(--grey);
   border-radius: 0.5rem;
   padding: 1rem;
 }
@@ -184,7 +214,14 @@ a {
   border: 5px solid rgba(0, 0, 0, 0);
 }
 .blueprint .viewport {
+  padding: 0;
   grid-area: span 2/span 1;
+}
+.blueprint .viewport .canvas {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+  overflow: hidden;
 }
 .blueprint .stats {
   grid-area: span 1/span 1;
@@ -257,10 +294,10 @@ a {
   transition: background-color 0.5s;
 }
 .blueprint .export .stringTypeCB:checked + .nav .stringType .string {
-  background-color: var(--nav-color);
+  background-color: var(--blue);
 }
 .blueprint .export .stringTypeCB:checked + .nav .stringType .json {
-  background-color: var(--container-color);
+  background-color: var(--grey);
 }
 .blueprint .export .stringTypeCB:checked ~ .data .string {
   display: none;
@@ -269,7 +306,7 @@ a {
   display: grid;
 }
 .blueprint .export .nav {
-  background-color: var(--black-theme-shapez);
+  background-color: var(--dar-grey);
   position: relative;
   display: inline-flex;
   flex-flow: row nowrap;
@@ -285,18 +322,18 @@ a {
 }
 .blueprint .export .nav .copy {
   height: calc(100% - 0.25rem);
-  background-color: var(--nav-color);
+  background-color: var(--blue);
   padding: 0 0.5rem;
   border-radius: 0.5rem;
 }
 .blueprint .export .nav .copy:hover {
-  background-color: var(--nav-hover-color);
+  background-color: var(--dark-blue);
 }
 .blueprint .export .nav .copy:active {
-  background-color: var(--nav-hover-color);
+  background-color: var(--dark-blue);
 }
 .blueprint .export .nav .stringType {
-  background-color: var(--black-theme-shapez);
+  background-color: var(--dar-grey);
   position: absolute;
   right: 0;
   top: 0;
@@ -308,10 +345,10 @@ a {
   border-radius: 0.5rem 0.5rem 0 0;
 }
 .blueprint .export .nav .stringType .string {
-  background-color: var(--container-color);
+  background-color: var(--grey);
 }
 .blueprint .export .nav .stringType .json {
-  background-color: var(--nav-color);
+  background-color: var(--blue);
 }
 .blueprint .export .data {
   overflow-y: auto;

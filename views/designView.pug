@@ -4,8 +4,12 @@ block scripts
 
 block content
   div.blueprint
-    div.viewport Viewer//todo
-      canvas#render
+    div.viewport(onload='init()')
+      img#sprites(src='/resource/sprites.png', style='display: none')
+      canvas.canvas#viewport
+      //- div.card
+      //-   div#blueprint-string #{bpString}
+      //- a#copy-render Copy render
     div.tags
       table.list
         each tag in tags
@@ -36,5 +40,5 @@ block content
           a.string ShrimpBP
           a.json JSON
       div.data
-        p.string #{bpString}
+        p.string#blueprint-string #{bpString}
         p.json #{bpJSON}

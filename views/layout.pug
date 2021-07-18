@@ -2,8 +2,10 @@ html
   head
     title #{title} - Shapez.bp
     link(rel='stylesheet' href='/stylesheets/style.css')
+    script(src='/javascripts/blueprint.js')
+    script(src='/javascripts/lzstring.js')
     block scripts
-  body
+  body(onload='init()')
     nav.navbar-root
       div.container
         a.brand(href='/')
@@ -24,7 +26,7 @@ html
             img.avatar(src=user.avatar)
             span.name #{user.name}
           a.user-logout(href='/logout')
-            img.logout(src='/images/logout.svg#logout')
+            img.logout(src='/images/logout.svg')
         else
           a.user(href='/login')
             span.login
@@ -33,6 +35,14 @@ html
               |  Log In
     div.header
       a.title #{title}
+      div.icons
+        a.star(href='/')
+          input.clickbox(type='checkbox')
+          img.icon(src='/images/star.svg')
+        a.fork(href='/')
+          img.icon(src='/images/fork.svg')
+        a.flag(href='/')
+          img.icon(src='/images/flag.svg')
       div.line
       a.author #{author}
     main.content

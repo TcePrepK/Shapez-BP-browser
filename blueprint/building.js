@@ -1,4 +1,4 @@
-const buildingDefs = require('./buildingDefs').definitions;
+const buildingDefs = require('../sharedRes/buildingDefs').definitions;
 
 class Building {
   constructor(entry) {

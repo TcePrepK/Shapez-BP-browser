@@ -1,9 +1,9 @@
 :root {
   font: Calibri, Arial, sans-serif;
-  --nav-color: #6af;
-  --nav-hover-color: #48d;
-  --container-color: #ccc;
-  --black-theme-shapez: #3e3f47;
+  --blue: #6af;
+  --dark-blue: #48d;
+  --grey: #ccc;
+  --dar-grey: #555;
   --gap-between-containers: 2.5rem;
 }
 
@@ -31,7 +31,7 @@ a {
   padding: 0.5rem 2rem;
   margin-bottom: var(--gap-between-containers);
 
-  background-color: var(--nav-color);
+  background-color: var(--blue);
 
   color: #fff;
 
@@ -98,7 +98,7 @@ a {
         border-radius: 0.5rem;
 
         &:hover {
-          // background-color: var(--nav-hover-color);
+          // background-color: var(--dark-blue);
           // box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
           box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
         }
@@ -128,13 +128,13 @@ a {
         width: 2rem;
 
         border-radius: 100%;
-        // border: 1px solid var(--nav-hover-color);
+        // border: 1px solid var(--dark-blue);
         box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 
         // background-color: red;
 
         &:hover {
-          background-color: var(--nav-hover-color);
+          background-color: var(--dark-blue);
         }
 
         &:active {
@@ -155,7 +155,7 @@ a {
         border-radius: 0.5rem;
 
         &:hover {
-          background-color: var(--nav-hover-color);
+          background-color: var(--dark-blue);
         }
       }
     }
@@ -196,24 +196,75 @@ a {
   padding: 0 var(--gap-between-containers);
   height: 4rem;
 
-  margin: 3rem 0 0 0;
+  margin: 3rem 0 1.65rem 0;
 
   .title {
     font-weight: 900;
     font-size: 2.5rem;
   }
 
+  .icons {
+    display: flex;
+    flex-wrap: wrap;
+
+    padding: 0;
+    margin-top: -1rem;
+
+    float: right;
+    // right: 0;
+    // top: 3rem;
+
+    // background-color: red;
+    position: relative;
+
+    > * .icon {
+      padding: 0.4rem;
+
+      // filter: invert(89%) sepia(0%) saturate(15%) hue-rotate(163deg) brightness(96%) contrast(85%);
+      filter: invert(66%) sepia(0%) saturate(62%) hue-rotate(145deg) brightness(93%) contrast(89%);
+    }
+
+    .star {
+      .icon {
+        border-radius: 1rem;
+      }
+
+      .clickbox {
+        position: absolute;
+
+        margin: 0;
+
+        left: 0.5rem;
+
+        z-index: 2;
+        opacity: 0;
+
+        width: 25%;
+        height: 100%;
+
+        &:hover + .icon {
+          filter: invert(61%) sepia(31%) saturate(6001%) hue-rotate(192deg) brightness(89%) contrast(93%);
+          // box-shadow: rgba(0, 0, 0, 1) 0px 1px 4px;
+        }
+
+        &:checked + .icon {
+          filter: invert(68%) sepia(40%) saturate(7087%) hue-rotate(192deg) brightness(91%) contrast(90%);
+        }
+      }
+    }
+  }
+
   .line {
     height: 0.1rem;
 
-    background-color: var(--black-theme-shapez);
+    background-color: var(--dar-grey);
   }
 
   .author {
     font-weight: 800;
     font-size: 1.75rem;
 
-    color: var(--nav-color);
+    color: var(--blue);
   }
 }
 
@@ -226,7 +277,7 @@ a {
   padding: var(--gap-between-containers);
 
   div {
-    background-color: var(--container-color);
+    background-color: var(--grey);
     border-radius: 0.5rem;
     padding: 1rem;
   }
@@ -243,7 +294,16 @@ a {
   }
 
   .viewport {
+    padding: 0;
     grid-area: span 2 / span 1;
+
+    .canvas {
+      width: 100%;
+      height: 100%;
+
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
   }
 
   .stats {
@@ -360,11 +420,11 @@ a {
 
       &:checked {
         + .nav .stringType .string {
-          background-color: var(--nav-color);
+          background-color: var(--blue);
         }
 
         + .nav .stringType .json {
-          background-color: var(--container-color);
+          background-color: var(--grey);
         }
 
         ~ .data .string {
@@ -378,7 +438,7 @@ a {
     }
 
     .nav {
-      background-color: var(--black-theme-shapez);
+      background-color: var(--dar-grey);
 
       position: relative;
       display: inline-flex;
@@ -402,22 +462,22 @@ a {
 
       .copy {
         height: calc(100% - 0.25rem);
-        background-color: var(--nav-color);
+        background-color: var(--blue);
 
         padding: 0 0.5rem;
         border-radius: 0.5rem;
 
         &:hover {
-          background-color: var(--nav-hover-color);
+          background-color: var(--dark-blue);
         }
 
         &:active {
-          background-color: var(--nav-hover-color);
+          background-color: var(--dark-blue);
         }
       }
 
       .stringType {
-        background-color: var(--black-theme-shapez);
+        background-color: var(--dar-grey);
         position: absolute;
 
         right: 0;
@@ -433,11 +493,11 @@ a {
         }
 
         .string {
-          background-color: var(--container-color);
+          background-color: var(--grey);
         }
 
         .json {
-          background-color: var(--nav-color);
+          background-color: var(--blue);
         }
       }
     }

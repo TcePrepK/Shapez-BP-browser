@@ -1,14 +1,14 @@
-var LZString = (function () {
+let LZString = (function () {
   function o(o, r) {
     if(!t[o]) {
       t[o] = {};
-      for(var n = 0; n < o.length; n++) {
+      for(let n = 0; n < o.length; n++) {
         t[o][o.charAt(n)] = n;
       }
     }
     return t[o][r];
   }
-  var r = String.fromCharCode,
+  let r = String.fromCharCode,
     n = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=',
     e = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-$',
     t = {},
@@ -17,7 +17,7 @@ var LZString = (function () {
         if(null == o) {
           return '';
         }
-        var r = i._compress(o, 6, function (o) {
+        let r = i._compress(o, 6, function (o) {
           return n.charAt(o);
         });
         switch(r.length % 4) {
@@ -58,8 +58,8 @@ var LZString = (function () {
             });
       },
       compressToUint8Array: function (o) {
-        for(var r = i.compress(o), n = new Uint8Array(2 * r.length), e = 0, t = r.length; t > e; e++) {
-          var s = r.charCodeAt(e);
+        for(let r = i.compress(o), n = new Uint8Array(2 * r.length), e = 0, t = r.length; t > e; e++) {
+          let s = r.charCodeAt(e);
           (n[2 * e] = s >>> 8), (n[2 * e + 1] = s % 256);
         }
         return n;
@@ -68,10 +68,10 @@ var LZString = (function () {
         if(null === o || void 0 === o) {
           return i.decompress(o);
         }
-        for(var n = new Array(o.length / 2), e = 0, t = n.length; t > e; e++) {
+        for(let n = new Array(o.length / 2), e = 0, t = n.length; t > e; e++) {
           n[e] = 256 * o[2 * e] + o[2 * e + 1];
         }
-        var s = [];
+        let s = [];
         return (
           n.forEach(function (o) {
             s.push(r(o));
@@ -105,7 +105,7 @@ var LZString = (function () {
         if(null == o) {
           return '';
         }
-        var e,
+        let e,
           t,
           i,
           s = {},
@@ -200,7 +200,7 @@ var LZString = (function () {
             });
       },
       _decompress: function (o, n, e) {
-        var t,
+        let t,
           i,
           s,
           p,
@@ -303,7 +303,3 @@ var LZString = (function () {
       return LZString;
     })
   : 'undefined' != typeof module && null != module && (module.exports = LZString);
-
-module.exports = {
-  LZString,
-}

@@ -5,14 +5,13 @@ const router = express.Router();
 const Blueprint = require('../blueprint/blueprint');
 
 const exampleBps = require('../config/exampleBlueprints.json');
-const{ renderBlueprint } = require('../public/javascripts/render');
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', function(req, res, next) {
   res.render('index', { blueprints: exampleBps.blueprints });
 });
-router.get('/:id', function (req, res, next) {
-  let bp = exampleBps.blueprints.find(b => b.url === req.params.id);
+router.get('/:id', function(req, res, next) {
+  let bp = exampleBps.blueprints.find( b => b.url === req.params.id );
   if(bp) {
     const user = {
       name: 'SkimnerPhi',
