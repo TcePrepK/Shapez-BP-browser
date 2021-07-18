@@ -5,9 +5,6 @@
   --container-color: #ccc;
   --black-theme-shapez: #3e3f47;
   --gap-between-containers: 2.5rem;
-
-  --json-color: #48d;
-  --shrimpBP-color: #ccc;
 }
 
 body {
@@ -49,6 +46,8 @@ a {
     align-items: baseline;
 
     position: relative;
+
+    user-select: none;
 
     .brand {
       display: block;
@@ -221,7 +220,7 @@ a {
 .blueprint {
   display: grid;
   grid-template-rows: 10rem 15rem 14rem;
-  grid-template-columns: 3fr 3fr;
+  grid-template-columns: 3fr 1.5fr 0.5fr;
   gap: var(--gap-between-containers);
 
   padding: var(--gap-between-containers);
@@ -268,18 +267,50 @@ a {
     }
   }
 
-  .description {
+  .tags {
     grid-area: span 1 / span 1;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    padding-right: 0;
+
+    word-break: break-all;
     overflow-y: auto;
 
-    padding-top: 0.75rem;
+    .tag {
+      // position: absolute;
 
-    p {
-      margin: 0;
+      font-weight: bold;
+      text-align: center;
+
+      padding: 0.25rem 0.5rem;
+      margin: 0.25rem;
+
+      border-radius: 2rem 0 2rem 2rem;
+
+      background-color: #f0fa;
     }
 
-    p + p {
-      margin-top: 1rem;
+    // .title {
+    //   font-weight: bold;
+    //   padding-right: 1rem;
+
+    //   &::after {
+    //     content: ':';
+    //   }
+    // }
+  }
+
+  .description {
+    grid-area: span 1 / span 2;
+    overflow-y: auto;
+
+    // padding: -0.5rem 0;
+    padding: 0 0 0 1rem;
+
+    > * {
+      margin: 1rem 0;
     }
   }
 
@@ -288,7 +319,7 @@ a {
   }
 
   .export {
-    grid-area: span 1 / span 1;
+    grid-area: span 1 / span 2;
 
     padding: 0;
     margin: 0;
@@ -296,13 +327,64 @@ a {
     display: grid;
     grid-template-rows: 2.5rem 11.5rem;
 
+    position: relative;
+
+    > * {
+      grid-area: span 1 / span 1;
+
+      margin: 0;
+
+      word-break: break-all;
+    }
+
+    .stringTypeCB {
+      position: absolute;
+      opacity: 0;
+
+      right: 0.5rem;
+      top: 0;
+
+      // width: auto;
+      width: 11rem;
+      height: 2.5rem;
+
+      border-radius: 0.5rem 0.5rem 0 0;
+      z-index: 1;
+
+      &:hover {
+        + .nav .stringType .string,
+        + .nav .stringType .json {
+          transition: background-color 0.5s;
+        }
+      }
+
+      &:checked {
+        + .nav .stringType .string {
+          background-color: var(--nav-color);
+        }
+
+        + .nav .stringType .json {
+          background-color: var(--container-color);
+        }
+
+        ~ .data .string {
+          display: none;
+        }
+
+        ~ .data .json {
+          display: grid;
+        }
+      }
+    }
+
     .nav {
       background-color: var(--black-theme-shapez);
 
+      position: relative;
       display: inline-flex;
+
       flex-flow: row nowrap;
 
-      margin: 0;
       padding: 0.25rem 0.5rem 0rem 0.5rem;
 
       white-space: nowrap;
@@ -310,13 +392,12 @@ a {
       border-radius: 0.5rem 0.5rem 0 0;
       text-align: center;
 
+      user-select: none;
+
       > * {
         font-size: 1.5rem;
 
-        border: none;
         color: #fff;
-
-        // cursor: pointer;
       }
 
       .copy {
@@ -337,79 +418,48 @@ a {
 
       .stringType {
         background-color: var(--black-theme-shapez);
-        position: relative;
+        position: absolute;
+
+        right: 0;
+        top: 0;
 
         margin-left: auto;
-        padding: 0;
+        padding: 0.25rem 0.5rem 0 0;
 
         > * {
           padding: 0 0.5rem 0.45rem 0.5rem;
-
-          font-size: 1.5rem;
-
-          color: #fff;
 
           border-radius: 0.5rem 0.5rem 0 0;
         }
 
         .string {
-          background-color: var(--shrimpBP-color);
+          background-color: var(--container-color);
         }
 
         .json {
-          background-color: var(--json-color);
-
-          &:hover {
-            background-color: var(--nav-hover-color);
-          }
-
-          &:active {
-            background-color: var(--nav-hover-color);
-          }
-        }
-
-        .stringTypeCB {
-          position: absolute;
-
-          margin: 0;
-          opacity: 0;
-
-          left: 0;
-          top: 0;
-
-          width: 100%;
-          height: 100%;
-
-          &:checked ~ .string {
-            background-color: var(--nav-color);
-          }
-
-          &:checked ~ .json {
-            background-color: var(--container-color);
-          }
+          background-color: var(--nav-color);
         }
       }
     }
 
     .data {
-      grid-area: span 1 / span 1;
-
-      word-break: break-all;
-
-      width: calc(100% - 2rem);
-      // height: 100%;
       overflow-y: auto;
 
       width: auto;
       padding-right: 0rem;
+      padding-top: 0.75rem;
 
       font-family: monospace;
 
-      .item {
+      > * {
         margin: 0;
         padding: 0;
 
-        font-size: 1.3rem;
+        font-size: 0.75rem;
+      }
+
+      .json {
+        display: none;
       }
     }
   }
