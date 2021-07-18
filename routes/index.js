@@ -19,9 +19,13 @@ router.get('/:id', function(req, res, next) {
     };
     
     const blueprint = Blueprint.importShrimpBP(bp.data);
-    const description = 'Takes in one full belt of each color paint and outputs white paint back the same direction.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam consequat tempor ipsum, a blandit libero. Ut eget vehicula sem, et maximus lectus. Proin a varius felis, eget imperdiet nisi. Morbi nec mi mi. Donec faucibus congue lectus, ac vulputate nulla tincidunt vitae. Aliquam scelerisque dui in tempor auctor. Ut finibus porta risus, non congue nulla malesuada sed. Nulla facilisi. Phasellus et sem ac sem ullamcorper imperdiet. Vestibulum varius lorem et lacus venenatis congue. Quisque venenatis egestas diam, quis suscipit mauris venenatis eget. Maecenas quis tempus mauris.'.split('\n');
     
-    res.render('designView', { title: bp.name, user, bpString: bp.data, stats: blueprint.stats, description });
+    const bin = blueprint.exportBinary();
+    console.log(bin.length);
+    
+    const description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam consequat tempor ipsum, a blandit libero. Ut eget vehicula sem, et maximus lectus. Proin a varius felis, eget imperdiet nisi. Morbi nec mi mi. Donec faucibus congue lectus, ac vulputate nulla tincidunt vitae. Aliquam scelerisque dui in tempor auctor. Ut finibus porta risus, non congue nulla malesuada sed. Nulla facilisi. Phasellus et sem ac sem ullamcorper imperdiet. Vestibulum varius lorem et lacus venenatis congue. Quisque venenatis egestas diam, quis suscipit mauris venenatis eget. Maecenas quis tempus mauris.'.split('\n');
+    
+    res.render('blueprintView', { title: bp.name, user, bpString: bp.data, stats: blueprint.stats, description });
   } else {
     res.render('blueprintError');
   }
