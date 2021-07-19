@@ -4,24 +4,38 @@ block scripts
 
 block content
   div.blueprint
-    div.bp-viewport Viewer//todo
-      canvas#render
-    div.bp-stats
-      table.stats-list
-        tr#stat-dimensions
-          td.stat-title Dimensions
-          td.stat-value #{stats.width}×#{stats.height}
-        tr#stat-belts
-          td.stat-title Belts
-          td.stat-value #{stats.belts}
-        tr#stat-buildings
-          td.stat-title Buildings
-          td.stat-value #{stats.buildings}
-        tr#stat-level
-          td.stat-title Min. level
-          td.stat-value #{stats.minLevel}
-    div.bp-description
+    div.viewport(onload='init()')
+      img#sprites(src='/resource/sprites.png', style='display: none')
+      canvas.canvas#viewport
+    div.tags
+      table.list
+        each tag in tags
+          div.tag(id=tag) #{tag}
+    div.stats
+      table.list
+        tr#dimensions
+          td.title Dimensions
+          td.value #{stats.width}×#{stats.height}
+        tr#belts
+          td.title Belts
+          td.value #{stats.belts}
+        tr#buildings
+          td.title Buildings
+          td.value #{stats.buildings}
+        tr#level
+          td.title Min. level
+          td.value #{stats.minLevel}
+    div.description
       each paragraph in description
         p #{paragraph}
-    div.bp-forks Fork//todo
-    div.bp-export Export//todo
+    div.forks Fork//todo
+    div.export
+      input.stringTypeCB(type='checkbox', onclick='changeCurrentStringType()')
+      ul.nav
+        button.copy(onclick='copyCurrentStringData()') Copy
+        div.stringType#typeButtons
+          a.string ShrimpBP
+          a.json JSON
+      div.data
+        p.string#blueprint-string #{bpString}
+        p.json#blueprint-json #{bpJSON}

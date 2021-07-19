@@ -11,25 +11,29 @@ class Building {
     this.links = entry.links;
     this.sprite = entry.sprite;
   }
-  
+
   farCorner(rotation) {
     switch(rotation) {
-      case 0: return {
-        x: this.width - 1,
-        y: this.height - 1
-      };
-      case 1: return {
-        x: 1 - this.height,
-        y: this.width - 1
-      };
-      case 2: return {
-        x: 1 - this.width,
-        y: 1 - this.height
-      };
-      case 3: return {
-        x: this.height - 1,
-        y: 1 - this.width
-      };
+      case 0:
+        return {
+          x: this.width - 1,
+          y: this.height - 1,
+        };
+      case 1:
+        return {
+          x: 1 - this.height,
+          y: this.width - 1,
+        };
+      case 2:
+        return {
+          x: 1 - this.width,
+          y: 1 - this.height,
+        };
+      case 3:
+        return {
+          x: this.height - 1,
+          y: 1 - this.width,
+        };
     }
   }
 }
@@ -54,5 +58,5 @@ function byName(name) {
 
 module.exports = {
   byCode,
-  byName
+  byName,
 };

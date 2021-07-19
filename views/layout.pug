@@ -2,33 +2,50 @@ html
   head
     title #{title} - Shapez.bp
     link(rel='stylesheet' href='/stylesheets/style.css')
+    script(src='/javascripts/blueprint.js')
+    script(src='/javascripts/lzstring.js')
+    script(src='/javascripts/tags.js')
     block scripts
-  body
+  body(onload='init()')
     nav.navbar-root
-      div.navbar-container
-        a.navbar-brand(href='/')
+      div.container
+        a.brand(href='/')
           img(src='/images/logo.png')
           span Shapez.bp
-        ul.navbar-nav
-          li.nav-item
-            a.nav-link#indexNew(href='/explore/new') New
-          li.nav-item
-            a.nav-link#indexTop(href='/explore/top') Top
+        ul.nav
+          li.item
+            a.link#indexNew(href='/explore/new') New
+          li.item
+            a.link#indexTop(href='/explore/top') Top
           if user
-            li.nav-item
-              a.nav-link#indexUser(href='/user/book') My book
-            li.nav-item
-              a.nav-link#userCreate(href='/create') Create
+            li.item
+              a.link#indexUser(href='/user/book') My book
+            li.item
+              a.link#userCreate(href='/create') Create
         if user
-          a.nav-user(href='/user')
-            img.user-avatar(src=user.avatar)
-            span.user-name #{user.name}
+          a.user(href='/user')
+            img.avatar(src=user.avatar)
+            span.name #{user.name}
+          a.user-logout(href='/logout')
+            img.logout(src='/images/logout.svg')
         else
-          a.nav-user(href='/login')
-            span.nav-login
+          a.user(href='/login')
+            span.login
               svg.discord-login(viewbox='0 0 73 57')
                 use(xlink:href='/images/discord.svg#logo')
               |  Log In
+    div.header
+      a.title #{title}
+      div.icons
+        a.star(href='/')
+          input.clickbox(type='checkbox')
+          img.icon(src='/images/star.svg')
+        a.fork(href='/')
+          img.icon(src='/images/fork.svg')
+        a.flag(href='/')
+          img.icon(src='/images/flag.svg')
+      div.line
+      a.author #{author}
     main.content
       block content
     

@@ -1,11 +1,11 @@
 html
   head
     title #{name} - Shapez.io Blueprint
-    link(rel='stylesheet' href='/stylesheets/beta.css')
+    link(rel='stylesheet' href='/stylesheets/style.css')
     script(src='/javascripts/blueprint.js')
     script(src='/javascripts/lzstring.js')
   body(onload='init()')
-    img#sprites(src='/resource/sprites.png' style='display: none')
+    img#sprites(src='/resource/sprites.png', style='display: none')
     canvas#viewport
     div#blueprint-card
       div#blueprint-string #{bpString}

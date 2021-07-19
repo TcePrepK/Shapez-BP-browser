@@ -1,4 +1,4 @@
-const { Buffer } = require('buffer');
+const{ Buffer } = require('buffer');
 const LZString = require('lz-string');
 
 const Building = require('./building');
@@ -11,7 +11,7 @@ const SIGNAL_SHAPES = [...'CRWS'];
 class Blueprint {
   constructor(buildings) {
     this.buildings = buildings;
-    
+
     const bounds = this.buildings.reduce((bounds, building) => {
       const corner = building.type.farCorner(building.rotation);
       bounds.minX = Math.min(bounds.minX, building.x, corner.x);
@@ -25,19 +25,19 @@ class Blueprint {
       maxX: Number.MIN_SAFE_INTEGER,
       maxY: Number.MIN_SAFE_INTEGER
     });
-    
+
     this.normalizeBounds(bounds);
   }
-  
+
   trim() {
     const bounds = this.buildings.reduce((bounds, building) => {
       switch(building.type.internal) {
-        case 'beltStraight':
-        case 'wireGrStraight':
-        case 'wireBlStraight':
+        case'beltStraight':
+        case'wireGrStraight':
+        case'wireBlStraight':
           return bounds;
       }
-      
+
       const corner = building.type.farCorner(building.rotation);
       bounds.minX = Math.min(bounds.minX, building.x, corner.x);
       bounds.minY = Math.min(bounds.minY, building.y, corner.y);
@@ -50,9 +50,10 @@ class Blueprint {
       maxX: Number.MIN_SAFE_INTEGER,
       maxY: Number.MIN_SAFE_INTEGER
     });
-    
+
     this.normalizeBounds(bounds);
   }
+
   rotate(rotation) {
     rotation = (rotation % 4 + 4) % 4;
     if(rotation % 2 === 1) {
@@ -62,7 +63,7 @@ class Blueprint {
       building.rotation = (building.rotation + rotation) % 4;
       switch(rotation) {
         case 0: return;
-        case 1: 
+        case 1:
           [building.x, building.y] = [
             this.width - building.y - 1,
             building.x
@@ -81,16 +82,17 @@ class Blueprint {
       }
     });
   }
+
   normalizeBounds(bounds) {
     const offsetX = MARGIN - bounds.minX;
     const offsetY = MARGIN - bounds.minY;
     this.width = bounds.maxX - bounds.minX + 2 * MARGIN + 1;
     this.height = bounds.maxY - bounds.minY + 2 * MARGIN + 1;
-    
+
     this.buildings = this.buildings.reduce((acc, building) => {
       building.x += offsetX;
       building.y += offsetY;
-      
+
       if(building.x < 0 || building.x >= this.width) {
         return acc;
       }
@@ -101,7 +103,7 @@ class Blueprint {
       return acc;
     }, []);
   }
-  
+
   get stats() {
     return this.buildings.reduce((acc, building) => {
       acc.minLevel = Math.max(acc.minLevel, building.type.level);
@@ -119,7 +121,7 @@ class Blueprint {
       minLevel: 0
     });
   }
-  
+
   static importBinary(data) {
     let buildings = [];
     let offset = 0;
@@ -164,10 +166,10 @@ class Blueprint {
             // only if layer 1 is non-empty
             head |= data.readUInt8(offset++);
           }
-          
+
           let quads = new Array(16);
           let buf = 0, bits = 0;
-          
+
           for(let i = 0; i < 16; i++) {
             let enabled = !!(head >> 15 - i & 0x01);
             if(enabled) {
@@ -175,7 +177,7 @@ class Blueprint {
                 // load another byte onto the end of the buffer if there aren't enough bits
                 let next = data.readUInt8(offset++)
                 buf |= next << 4 - bits;
-                
+
                 bits += 8;
               }
 
@@ -192,7 +194,7 @@ class Blueprint {
               quads[i] = '--';
             }
           }
-          
+
           let shape = quads.join('')
             // insert layer separators every 4 quads
             .replace(/(.{8})/g, '$1:')
@@ -200,7 +202,7 @@ class Blueprint {
             .substring(0, 35)
             // trim trailing empty layers
             .replace(/:-{8}/g,'');
-          
+
           entry.meta = {
             type: 'shape',
             data: shape
@@ -211,6 +213,7 @@ class Blueprint {
     }
     return new Blueprint(buildings);
   }
+
   exportBinary() {
     // Most buildings are 6 bytes, constant signals can be up to 12 bytes
     const estimateSize = this.buildings.length * 18;
@@ -225,7 +228,7 @@ class Blueprint {
       if(building.type.internal === 'constantSignal') {
         if(building.meta.type === 'type') {
           switch(building.meta.data) {
-            case 'item':
+            case'item':
               data.writeUInt8(0x07, offset++);
               break;
           }
@@ -235,11 +238,11 @@ class Blueprint {
           data.writeUInt8(SIGNAL_COLORS.indexOf(building.meta.data) & 0x07 | 0x08, offset++);
         } else if(building.meta.type === 'shape') {
           // remove layer separators
-          
+
           let val = building.meta.data.replace(/:/g,'');
           // pad to 2 or 4 layers, split into array of quads
           val = val.padEnd(val.length > 16 ? 32 : 16, '-').match(/(.{2})/g);
-          
+
           let head = [];
           // generate bit field for enabled quads
           // first two layers
@@ -254,17 +257,17 @@ class Blueprint {
           for(let i = 8; i < val.length; i++) {
             head[1] = head[1] << 1 | val[i] !== '--';
           }
-          
+
           // remove all empty quads
           val = val.filter(q => q !== '--');
-          
+
           let buf = [];
           let pos = 0;
           for(let i = 0; i < val.length; i++) {
             const shape = SIGNAL_SHAPES.indexOf(val[i].charAt(0));
             const color = SIGNAL_COLORS.findIndex(c => c.startsWith(val[i].charAt(1)));
             const pair = color << 2 | shape;
-            
+
             // shift quad data into position and add to buffer
             const bufOffset = pos % 8 - 3;
             buf[Math.floor(pos / 8)] |= bufOffset < 0 ? pair << -bufOffset : pair >> bufOffset;
@@ -274,17 +277,17 @@ class Blueprint {
             }
             pos += 5;
           }
-          
+
           [...head,...buf].forEach(v => {
             data.writeUInt8(v, offset++);
           });
         }
       }
     });
-    
+
     return data.slice(0, offset);
   }
-  
+
   static importJSON(json) {
     const buildings = json.map((entry) => {
       let ret = {
@@ -331,7 +334,7 @@ class Blueprint {
     });
     return json;
   }
-  
+
   static importShrimpBP(shrimpBP) {
     return Blueprint.importJSON(
       JSON.parse(
@@ -339,6 +342,7 @@ class Blueprint {
       )
     );
   }
+
   exportShrimpBP() {
     return LZString.compressToEncodedURIComponent(
       JSON.stringify(
