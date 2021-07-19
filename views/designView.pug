@@ -7,9 +7,6 @@ block content
     div.viewport(onload='init()')
       img#sprites(src='/resource/sprites.png', style='display: none')
       canvas.canvas#viewport
-      //- div.card
-      //-   div#blueprint-string #{bpString}
-      //- a#copy-render Copy render
     div.tags
       table.list
         each tag in tags
@@ -33,12 +30,12 @@ block content
         p #{paragraph}
     div.forks Fork//todo
     div.export
-      input.stringTypeCB(type='checkbox')
+      input.stringTypeCB(type='checkbox', onclick='changeCurrentStringType()')
       ul.nav
-        a.copy Copy
+        button.copy(onclick='copyCurrentStringData()') Copy
         div.stringType#typeButtons
           a.string ShrimpBP
           a.json JSON
       div.data
         p.string#blueprint-string #{bpString}
-        p.json #{bpJSON}
+        p.json#blueprint-json #{bpJSON}

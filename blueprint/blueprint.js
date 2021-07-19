@@ -53,6 +53,7 @@ class Blueprint {
 
     this.normalizeBounds(bounds);
   }
+
   rotate(rotation) {
     rotation = (rotation % 4 + 4) % 4;
     if(rotation % 2 === 1) {
@@ -81,6 +82,7 @@ class Blueprint {
       }
     });
   }
+
   normalizeBounds(bounds) {
     const offsetX = MARGIN - bounds.minX;
     const offsetY = MARGIN - bounds.minY;
@@ -211,6 +213,7 @@ class Blueprint {
     }
     return new Blueprint(buildings);
   }
+
   exportBinary() {
     // Most buildings are 6 bytes, constant signals can be up to 12 bytes
     const estimateSize = this.buildings.length * 18;
@@ -339,6 +342,7 @@ class Blueprint {
       )
     );
   }
+
   exportShrimpBP() {
     return LZString.compressToEncodedURIComponent(
       JSON.stringify(

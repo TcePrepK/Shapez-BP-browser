@@ -153,12 +153,12 @@ a {
   font-size: 2.5rem;
 }
 .header .icons {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   padding: 0;
   margin-top: -1rem;
   float: right;
-  position: relative;
 }
 .header .icons > * .icon {
   padding: 0.4rem;
@@ -170,10 +170,10 @@ a {
 .header .icons .star .clickbox {
   position: absolute;
   margin: 0;
-  left: 0.5rem;
+  left: 0;
   z-index: 2;
   opacity: 0;
-  width: 25%;
+  width: 33.5%;
   height: 100%;
 }
 .header .icons .star .clickbox:hover + .icon {
@@ -323,14 +323,17 @@ a {
 .blueprint .export .nav .copy {
   height: calc(100% - 0.25rem);
   background-color: var(--blue);
+  border: none;
   padding: 0 0.5rem;
   border-radius: 0.5rem;
 }
 .blueprint .export .nav .copy:hover {
-  background-color: var(--dark-blue);
+  transform: translateY(-1px);
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 4px;
 }
 .blueprint .export .nav .copy:active {
-  background-color: var(--dark-blue);
+  transform: translateY(1px);
+  box-shadow: rgba(0, 0, 0, 0.5) 0 1px 4px 0 inset;
 }
 .blueprint .export .nav .stringType {
   background-color: var(--dar-grey);
@@ -341,7 +344,7 @@ a {
   padding: 0.25rem 0.5rem 0 0;
 }
 .blueprint .export .nav .stringType > * {
-  padding: 0 0.5rem 0.45rem 0.5rem;
+  padding: 0 0.5rem 0.4rem 0.5rem;
   border-radius: 0.5rem 0.5rem 0 0;
 }
 .blueprint .export .nav .stringType .string {
@@ -351,6 +354,7 @@ a {
   background-color: var(--blue);
 }
 .blueprint .export .data {
+  overflow-x: hidden;
   overflow-y: auto;
   width: auto;
   padding-right: 0rem;
@@ -360,7 +364,8 @@ a {
 .blueprint .export .data > * {
   margin: 0;
   padding: 0;
-  font-size: 0.75rem;
+  word-break: break-all;
+  font-size: 1rem;
 }
 .blueprint .export .data .json {
   display: none;

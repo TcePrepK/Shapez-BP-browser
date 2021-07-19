@@ -10,8 +10,8 @@ const spriteDims = {
     scaleBounds: {
       min: 0,
       preferMin: 0.25,
-      max: 1
-    }
+      max: 1,
+    },
   },
   minimap: {
     size: 3,
@@ -23,37 +23,57 @@ const spriteDims = {
     scaleBounds: {
       min: 1,
       preferMin: 1,
-      max: 16
-    }
-  }
+      max: 16,
+    },
+  },
 };
 const backgroundColors = {
   light: {
     background: '#ffffff',
     gridLines: '#fafafa',
     border: '#83d8ff',
-    outOfBounds: '#f7f7ff'
+    outOfBounds: '#f7f7ff',
   },
   dark: {
     background: '#3e3f47',
     gridLines: '#42434b',
     border: '#83d8ff',
-    outOfBounds: '#f7f7ff'
-  }
+    outOfBounds: '#f7f7ff',
+  },
 };
 const blueprintMargin = 1;
 
-let spritesheet, viewport, bpString;
+let spritesheet, viewport, bpString, bpJSON;
 
 const defsByCode = new Map();
 const defsByName = new Map();
 
 function init() {
-    spritesheet = document.getElementById('sprites');
-    viewport = document.getElementById('viewport');
-    bpString = document.getElementById('blueprint-string').innerText;
+  spritesheet = document.getElementById('sprites');
+  viewport = document.getElementById('viewport');
+  bpString = document.getElementById('blueprint-string').innerText;
+  bpJSON = document.getElementById('blueprint-json').innerText;
 
-  fetch(defsUrl).then(r => r.json()).then(ready);
+  fetch(defsUrl)
+    .then(r => r.json())
+    .then(ready);
+}
+
+let currentDataType = 'string';
+function changeCurrentStringType() {
+  if(currentDataType == 'string') {
+    currentDataType = 'json';
+  } else {
+    currentDataType = 'string';
+  }
+}
+
+// copies bpJSON or bpString depends on currentDataType
+function copyCurrentStringData() {
+  const text = currentDataType == 'string' ? bpString : bpJSON;
+  const blob = new Blob([text], { type: 'text/plain' });
+  const data = [new ClipboardItem({ 'text/plain': blob })];
+  navigator.clipboard.write(data);
 }
 
 function ready(json) {
@@ -65,16 +85,16 @@ function ready(json) {
     defsByName.set(building.internal, building);
   });
 
-  const style = {mode: 'normal', theme: 'dark'};
+  const style = { mode: 'normal', theme: 'dark' };
 
   const bp = Blueprint.importShrimpBP(bpString);
   const stats = bp.stats;
   console.log(
-    '%cBlueprint stats\n'
-  + '%cDimensions: %c%s×%s\n'
-  + '%cBelts:      %c%s\n'
-  + '%cBuildings:  %c%s\n'
-  + '%cMin. Level: %c%s',
+    '%cBlueprint stats\n' +
+      '%cDimensions: %c%s×%s\n' +
+      '%cBelts:      %c%s\n' +
+      '%cBuildings:  %c%s\n' +
+      '%cMin. Level: %c%s',
     'font-weight: bold; font-size:20px;',
     'font-weight: bold; font-size:16px;',
     'font-size:16px;',
@@ -102,57 +122,63 @@ function ready(json) {
     x: 0,
     y: 0,
     scale: clamp(
-      Math.max(
-        viewport.width / render.width,
-        viewport.height / render.height
-      ),
+      Math.max(viewport.width / render.width, viewport.height / render.height),
       mode.scaleBounds.min,
       mode.scaleBounds.max
     ),
     minScale: clamp(
-      Math.max(
-        viewport.width / render.width,
-        viewport.height / render.height
-      ),
+      Math.max(viewport.width / render.width, viewport.height / render.height),
       mode.scaleBounds.min,
       mode.scaleBounds.max
-    )
+    ),
   };
 
   var lastPos = null;
   viewport.addEventListener('mousedown', e => {
     e.preventDefault();
-    lastPos = {x: e.offsetX, y: e.offsetY};
+    lastPos = { x: e.offsetX, y: e.offsetY };
   });
 
   viewport.addEventListener('mouseup', () => {
     lastPos = null;
   });
 
+  viewport.addEventListener('mouseleave', () => {
+    lastPos = null;
+  });
+
   viewport.addEventListener('mousemove', e => {
-    if(lastPos) {
-      const deltaX = 2 * (e.offsetX - lastPos.x) / render.width;
-      const deltaY = 2 * (e.offsetY - lastPos.y) / render.height;
-      lastPos = {x: e.offsetX, y: e.offsetY};
-
-      const x = view.x + deltaX / view.scale;
-      const y = view.y + deltaY / view.scale;
-      // const w = (((render.width * view.scale - viewport.width) / 2) / viewport.width) / (view.scale * ((render.width / viewport.width) / 2));
-      // const h = (((render.height * view.scale - viewport.height) / 2) / viewport.height) / (view.scale * ((render.height / viewport.height) / 2));
-
-      const w = 1 - viewport.width / (render.width * view.scale);
-      const h = 1 - viewport.height / (render.height * view.scale);
-      view.x = clamp(x, -w, w);
-      view.y = clamp(y, -h, h);
-
-      redrawViewport(viewport, render, view, style);
+    if(!lastPos) {
+      return;
     }
+
+    const deltaX = (2 * (e.offsetX - lastPos.x)) / render.width;
+    const deltaY = (2 * (e.offsetY - lastPos.y)) / render.height;
+    lastPos = { x: e.offsetX, y: e.offsetY };
+
+    const x = view.x + deltaX / view.scale;
+    const y = view.y + deltaY / view.scale;
+
+    // // CURSED !!!
+    // const w = (((render.width * view.scale - viewport.width) / 2) / viewport.width) / (view.scale * ((render.width / viewport.width) / 2));
+    // const h = (((render.height * view.scale - viewport.height) / 2) / viewport.height) / (view.scale * ((render.height / viewport.height) / 2));
+
+    // // Moved into a function because we also use this on zoom !
+    // const w = 1 - viewport.width / (render.width * view.scale);
+    // const h = 1 - viewport.height / (render.height * view.scale);
+    // view.x = clamp(x, -w, w);
+    // view.y = clamp(y, -h, h);
+
+    fixViewPosition(x, y, render, view);
+    redrawViewport(viewport, render, view, style);
   });
 
   viewport.addEventListener('wheel', e => {
     e.preventDefault();
 
     view.scale = clamp(view.scale * (1 - Math.sign(e.deltaY) / 5), view.minScale, mode.scaleBounds.max);
+
+    fixViewPosition(view.x, view.y, render, view);
     redrawViewport(viewport, render, view, style);
   });
 
@@ -164,10 +190,7 @@ function ready(json) {
     viewport.height = viewport.clientHeight;
 
     view.minScale = clamp(
-      Math.max(
-        viewport.width / render.width,
-        viewport.height / render.height
-      ),
+      Math.max(viewport.width / render.width, viewport.height / render.height),
       mode.scaleBounds.min,
       mode.scaleBounds.max
     );
@@ -179,22 +202,29 @@ function ready(json) {
 
   redrawViewport(viewport, render, view, style);
 
-  try{
-    document.getElementById('copy-render').addEventListener('click', () => {
-      render.toBlob(blob => {
-        navigator.clipboard.write([new ClipboardItem({'image/png': blob})]);
-      });
-    });
-  } catch(ex) {
-    console.log(ex);
-  }
+  // try{
+  //   document.getElementById('copy-render').addEventListener('click', () => {
+  //     render.toBlob(blob => {
+  //       navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+  //     });
+  //   });
+  // } catch(ex) {
+  //   console.log(ex);
+  // }
+}
+
+function fixViewPosition(x, y, render, view) {
+  const w = 1 - viewport.width / (render.width * view.scale);
+  const h = 1 - viewport.height / (render.height * view.scale);
+  view.x = clamp(x, -w, w);
+  view.y = clamp(y, -h, h);
 }
 
 function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
 }
 
-function redrawViewport(viewport, render, view, style = {mode: 'normal', theme: 'dark'}) {
+function redrawViewport(viewport, render, view, style = { mode: 'normal', theme: 'dark' }) {
   const objCenterX = viewport.width / 2;
   const objCenterY = viewport.height / 2;
 
@@ -204,8 +234,8 @@ function redrawViewport(viewport, render, view, style = {mode: 'normal', theme: 
   const srcCenterX = srcAdjWidth / 2;
   const srcCenterY = srcAdjHeight / 2;
 
-  const panOffsetX = srcAdjWidth * view.x / 2;
-  const panOffsetY = srcAdjHeight * view.y / 2;
+  const panOffsetX = (srcAdjWidth * view.x) / 2;
+  const panOffsetY = (srcAdjHeight * view.y) / 2;
 
   const posX = objCenterX - srcCenterX + panOffsetX;
   const posY = objCenterY - srcCenterY + panOffsetY;
@@ -221,7 +251,7 @@ function redrawViewport(viewport, render, view, style = {mode: 'normal', theme: 
   ctx.drawImage(render, posX, posY, srcAdjWidth, srcAdjHeight);
 }
 
-function renderBlueprint(blueprint, style = {mode: 'normal', theme: 'dark'}) {
+function renderBlueprint(blueprint, style = { mode: 'normal', theme: 'dark' }) {
   const mode = spriteDims[style.mode];
 
   const pxWidth = mode.realSize * blueprint.width;
@@ -244,20 +274,13 @@ function renderBlueprint(blueprint, style = {mode: 'normal', theme: 'dark'}) {
       ctx.lineWidth = mode.gridWidth;
 
       for(let row = 1; row < blueprint.width; row++) {
-        ctx.moveTo(
-          mode.borderWidth + mode.realSize * row,
-          mode.borderWidth);
-        ctx.lineTo(
-          mode.borderWidth + mode.realSize * row,
-          mode.borderWidth + pxHeight);
+        ctx.moveTo(mode.borderWidth + mode.realSize * row, mode.borderWidth);
+        ctx.lineTo(mode.borderWidth + mode.realSize * row, mode.borderWidth + pxHeight);
       }
+
       for(let col = 1; col < blueprint.height; col++) {
-        ctx.moveTo(
-          mode.borderWidth,
-          mode.borderWidth + mode.realSize * col);
-        ctx.lineTo(
-          mode.borderWidth + pxWidth,
-          mode.borderWidth + mode.realSize * col);
+        ctx.moveTo(mode.borderWidth, mode.borderWidth + mode.realSize * col);
+        ctx.lineTo(mode.borderWidth + pxWidth, mode.borderWidth + mode.realSize * col);
       }
 
       ctx.stroke();
@@ -265,8 +288,7 @@ function renderBlueprint(blueprint, style = {mode: 'normal', theme: 'dark'}) {
   }
 
   blueprint.buildings.forEach(srcBuilding => {
-    if(srcBuilding.type.internal.startsWith('belt')
-    || srcBuilding.type.internal.startsWith('wire')) {
+    if(srcBuilding.type.internal.startsWith('belt') || srcBuilding.type.internal.startsWith('wire')) {
       drawSprite(ctx, mode, srcBuilding);
       return;
     }
@@ -315,9 +337,6 @@ function renderBlueprint(blueprint, style = {mode: 'normal', theme: 'dark'}) {
           break;
       }
 
-      searchX += linkX;
-      searchY += linkY;
-
       let inverseType;
       switch(srcLink.type) {
         case'beltIn':
@@ -328,50 +347,40 @@ function renderBlueprint(blueprint, style = {mode: 'normal', theme: 'dark'}) {
           break;
       }
 
-      const atLocation = blueprint.buildings.filter(
-        objBuilding => {
-          return objBuilding.type.contains(
-            objBuilding.rotation,
-            searchX - objBuilding.x,
-            searchY - objBuilding.y
-          );
-        }
-      );
+      const atLocation = blueprint.buildings.filter(objBuilding => {
+        return objBuilding.type.contains(
+          objBuilding.rotation,
+          searchX - objBuilding.x,
+          searchY - objBuilding.y
+        );
+      });
 
-      const paired = atLocation.some(
-        objBuilding => {
-          const foundLinks = objBuilding.type.linksAt(
-            objBuilding.rotation,
-            searchX - objBuilding.x,
-            searchY - objBuilding.y
-          );
+      const paired = atLocation.some(objBuilding => {
+        const foundLinks = objBuilding.type.linksAt(
+          objBuilding.rotation,
+          searchX - objBuilding.x,
+          searchY - objBuilding.y
+        );
 
-          return foundLinks.some(
-            objLink => {
-              return selfFacing === (objBuilding.rotation + objLink.facing + 2) % 4
-                  && inverseType === objLink.type;
-            }
+        return foundLinks.some(objLink => {
+          return (
+            selfFacing === (objBuilding.rotation + objLink.facing + 2) % 4 && inverseType === objLink.type
           );
-        }
-      );
+        });
+      });
 
       if(paired) {
-        drawSprite(
-          ctx,
-          mode,
-          {
-            type: Building.byName(srcLink.type),
-            x: linkX,
-            y: linkY,
-            rotation: selfFacing
-          }
-        );
+        drawSprite(ctx, mode, {
+          type: Building.byName(srcLink.type),
+          x: linkX,
+          y: linkY,
+          rotation: selfFacing,
+        });
       }
     });
   });
   blueprint.buildings.forEach(srcBuilding => {
-    if(srcBuilding.type.internal.startsWith('belt')
-    || srcBuilding.type.internal.startsWith('wire')) {
+    if(srcBuilding.type.internal.startsWith('belt') || srcBuilding.type.internal.startsWith('wire')) {
       return;
     }
 
@@ -384,7 +393,15 @@ function renderBlueprint(blueprint, style = {mode: 'normal', theme: 'dark'}) {
 function drawSprite(ctx, mode, building) {
   const ctxX = mode.realSize * (building.x + 0.5) + mode.borderWidth;
   const ctxY = mode.realSize * (building.y + 0.5) + mode.borderWidth;
-  const ctxR = building.rotation * Math.PI / 2;
+  const ctxR = (building.rotation * Math.PI) / 2;
+
+  const smallSpriteGroup = [
+    'beltStraight',
+    'beltIn',
+    'beltOut'
+  ]
+
+  const off = smallSpriteGroup.includes(building.type.internal) ? mode.borderWidth : 0;
 
   ctx.translate(ctxX, ctxY);
   ctx.rotate(ctxR);
@@ -396,9 +413,9 @@ function drawSprite(ctx, mode, building) {
     mode.size * building.type.width,
     mode.size * building.type.height,
     mode.realSize * -0.5 - mode.overlap * building.type.width,
-    mode.realSize * -0.5 - mode.overlap * building.type.height,
+    mode.realSize * -0.5 - mode.overlap * building.type.height - off / 2,
     mode.size * building.type.width,
-    mode.size * building.type.height
+    mode.size * building.type.height + off
   );
 
   ctx.rotate(-ctxR);
@@ -419,22 +436,26 @@ class Building {
 
   farCorner(rotation) {
     switch(rotation) {
-      case 0: return {
-        x: this.width - 1,
-        y: this.height - 1
-      };
-      case 1: return {
-        x: 1 - this.height,
-        y: this.width - 1
-      };
-      case 2: return {
-        x: 1 - this.width,
-        y: 1 - this.height
-      };
-      case 3: return {
-        x: this.height - 1,
-        y: 1 - this.width
-      };
+      case 0:
+        return {
+          x: this.width - 1,
+          y: this.height - 1,
+        };
+      case 1:
+        return {
+          x: 1 - this.height,
+          y: this.width - 1,
+        };
+      case 2:
+        return {
+          x: 1 - this.width,
+          y: 1 - this.height,
+        };
+      case 3:
+        return {
+          x: this.height - 1,
+          y: 1 - this.width,
+        };
     }
   }
 
@@ -448,8 +469,7 @@ class Building {
       corner.y = -corner.y;
       relativeY = -relativeY;
     }
-    return relativeX >= 0 && relativeX <= corner.x
-        && relativeY >= 0 && relativeY <= corner.y;
+    return relativeX >= 0 && relativeX <= corner.x && relativeY >= 0 && relativeY <= corner.y;
   }
   linksAt(rotation, relativeX, relativeY) {
     let searchI, searchJ;
@@ -486,82 +506,61 @@ class Blueprint {
   constructor(buildings) {
     this.buildings = buildings;
 
-    const bounds = this.buildings.reduce((bounds, building) => {
-      switch(building.type.internal) {
-        case'beltStraight':
-        case'wireGrStraight':
-        case'wireBlStraight':
-          return bounds;
-      }
-
-      const corner = building.type.farCorner(building.rotation);
-      bounds.minX = Math.min(bounds.minX, building.x, corner.x);
-      bounds.minY = Math.min(bounds.minY, building.y, corner.y);
-      bounds.maxX = Math.max(bounds.maxX, building.x, corner.x);
-      bounds.maxY = Math.max(bounds.maxY, building.y, corner.y);
-      return bounds;
-    }, {
-      minX: Number.MAX_SAFE_INTEGER,
-      minY: Number.MAX_SAFE_INTEGER,
-      maxX: Number.MIN_SAFE_INTEGER,
-      maxY: Number.MIN_SAFE_INTEGER
-    });
-
-    this.normalizeBounds(bounds);
+    this.trim();
   }
 
   trim() {
-    const bounds = this.buildings.reduce((bounds, building) => {
-      switch(building.type.internal) {
-        case'beltStraight':
-        case'wireGrStraight':
-        case'wireBlStraight':
-          return bounds;
-      }
+    const bounds = this.buildings.reduce(
+      (bounds, building) => {
+        switch(building.type.internal) {
+          case'beltStraight':
+          case'wireGrStraight':
+          case'wireBlStraight':
+            return bounds;
+        }
 
-      const corner = building.type.farCorner(building.rotation);
-      bounds.minX = Math.min(bounds.minX, building.x, corner.x);
-      bounds.minY = Math.min(bounds.minY, building.y, corner.y);
-      bounds.maxX = Math.max(bounds.maxX, building.x, corner.x);
-      bounds.maxY = Math.max(bounds.maxY, building.y, corner.y);
-      return bounds;
-    }, {
-      minX: Number.MAX_SAFE_INTEGER,
-      minY: Number.MAX_SAFE_INTEGER,
-      maxX: Number.MIN_SAFE_INTEGER,
-      maxY: Number.MIN_SAFE_INTEGER
-    });
+        const corner = building.type.farCorner(building.rotation);
+        bounds.minX = Math.min(bounds.minX, building.x, corner.x);
+        bounds.minY = Math.min(bounds.minY, building.y, corner.y);
+        bounds.maxX = Math.max(bounds.maxX, building.x, corner.x);
+        bounds.maxY = Math.max(bounds.maxY, building.y, corner.y);
+        return bounds;
+      },
+      {
+        minX: Number.MAX_SAFE_INTEGER,
+        minY: Number.MAX_SAFE_INTEGER,
+        maxX: Number.MIN_SAFE_INTEGER,
+        maxY: Number.MIN_SAFE_INTEGER,
+      }
+    );
 
     this.normalizeBounds(bounds);
   }
+
   rotate(rotation) {
-    rotation = (rotation % 4 + 4) % 4;
+    rotation = ((rotation % 4) + 4) % 4;
     if(rotation % 2 === 1) {
       [this.width, this.height] = [this.height, this.width];
     }
-    this.buildings.forEach((building) => {
+    this.buildings.forEach(building => {
       building.rotation = (building.rotation + rotation) % 4;
       switch(rotation) {
-        case 0: return;
+        case 0:
+          return;
         case 1:
-          [building.x, building.y] = [
-            this.width - building.y - 1,
-            building.x
-          ];
+          [building.x, building.y] = [this.width - building.y - 1, building.x];
           return;
         case 2:
           building.x = this.width - building.x - 1;
           building.y = this.height - building.y - 1;
           return;
         case 3:
-          [building.x, building.y] = [
-            building.y,
-            this.height - building.x - 1
-          ];
+          [building.x, building.y] = [building.y, this.height - building.x - 1];
           return;
       }
     });
   }
+
   normalizeBounds(bounds) {
     const offsetX = blueprintMargin - bounds.minX;
     const offsetY = blueprintMargin - bounds.minY;
@@ -584,63 +583,67 @@ class Blueprint {
   }
 
   get stats() {
-    return this.buildings.reduce((acc, building) => {
-      acc.minLevel = Math.max(acc.minLevel, building.type.level);
-      if(building.type.internal.startsWith('belt')) {
-        acc.belts++;
-      } else {
-        acc.buildings++;
+    return this.buildings.reduce(
+      (acc, building) => {
+        acc.minLevel = Math.max(acc.minLevel, building.type.level);
+        if(building.type.internal.startsWith('belt')) {
+          acc.belts++;
+        } else {
+          acc.buildings++;
+        }
+        return acc;
+      },
+      {
+        height: this.height - 2,
+        width: this.width - 2,
+        belts: 0,
+        buildings: 0,
+        minLevel: 0,
       }
-      return acc;
-    }, {
-      height: this.height - 2,
-      width: this.width - 2,
-      belts: 0,
-      buildings: 0,
-      minLevel: 0
-    });
+    );
   }
 
   static importJSON(json) {
-    const buildings = json.map((entry) => {
+    const buildings = json.map(entry => {
       let ret = {
         type: Building.byCode(entry.components.StaticMapEntity.code),
         x: entry.components.StaticMapEntity.origin.x,
         y: entry.components.StaticMapEntity.origin.y,
         rotation: entry.components.StaticMapEntity.rotation / 90,
-        ogRotation: entry.components.StaticMapEntity.rotation / 90
+        ogRotation: entry.components.StaticMapEntity.rotation / 90,
       };
       if(ret.type.internal === 'constantSignal') {
         ret.meta = {
           type: entry.components.ConstantSignal.signal.$,
-          data: entry.components.ConstantSignal.signal.data
+          data: entry.components.ConstantSignal.signal.data,
         };
       }
       return ret;
     });
     return new Blueprint(buildings);
   }
+
   exportJSON() {
-    const json = this.buildings.map((building) => {
+    const json = this.buildings.map(building => {
       let ret = {
         components: {
           StaticMapEntity: {
             origin: {
               x: building.x - Math.floor(this.width / 2),
-              y: building.y - Math.floor(this.height / 2)
+              y: building.y - Math.floor(this.height / 2),
             },
             rotation: building.rotation * 90,
             originalRotation: building.ogRotation * 90,
-            code: building.type.code
-          }
-        }
+            code: building.type.code,
+          },
+        },
       };
       if(building.type.internal === 'constantSignal') {
         ret.components.ConstantSignal = {
           signal: {
             $: building.meta.type,
-            data: building.meta.data
-          }
+            data: building.meta.data,
+          },
         };
       }
       return ret;
@@ -649,17 +652,10 @@ class Blueprint {
   }
 
   static importShrimpBP(shrimpBP) {
-    return Blueprint.importJSON(
-      JSON.parse(
-        LZString.decompressFromEncodedURIComponent(shrimpBP)
-      )
-    );
+    return Blueprint.importJSON(JSON.parse(LZString.decompressFromEncodedURIComponent(shrimpBP)));
   }
+
   exportShrimpBP() {
-    return LZString.compressToEncodedURIComponent(
-      JSON.stringify(
-        this.exportJSON()
-      )
-    );
+    return LZString.compressToEncodedURIComponent(JSON.stringify(this.exportJSON()));
   }
 }
