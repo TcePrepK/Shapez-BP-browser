@@ -253,7 +253,6 @@ a {
   padding: 0.25rem 0.5rem;
   margin: 0.25rem;
   border-radius: 2rem 0 2rem 2rem;
-  background-color: #f0fa;
 }
 .blueprint .description {
   grid-area: span 1/span 2;

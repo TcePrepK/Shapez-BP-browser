@@ -57,6 +57,8 @@ function init() {
   fetch(defsUrl)
     .then(r => r.json())
     .then(ready);
+
+  colorizeTags();
 }
 
 let currentDataType = 'string';

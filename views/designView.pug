@@ -10,7 +10,7 @@ block content
     div.tags
       table.list
         each tag in tags
-          div.tag #{tag}
+          div.tag(id=tag) #{tag}
     div.stats
       table.list
         tr#dimensions
