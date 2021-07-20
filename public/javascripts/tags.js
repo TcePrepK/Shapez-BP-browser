@@ -1,10 +1,10 @@
 const definedTags = [
     {
-        name: 'Painter',
+        name: 'mixer',
         color: '#f56954'
     },
     {
-        name: 'Shrimp',
+        name: 'early-game',
         color: '#00a65a'
     }
 ]

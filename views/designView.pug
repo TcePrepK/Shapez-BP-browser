@@ -7,10 +7,6 @@ block content
     div.viewport(onload='init()')
       img#sprites(src='/resource/sprites.png', style='display: none')
       canvas.canvas#viewport
-    div.tags
-      table.list
-        each tag in tags
-          div.tag(id=tag) #{tag}
     div.stats
       table.list
         tr#dimensions
@@ -30,12 +26,11 @@ block content
         p #{paragraph}
     div.forks Fork//todo
     div.export
-      input.stringTypeCB(type='checkbox', onclick='changeCurrentStringType()')
       ul.nav
         button.copy(onclick='copyCurrentStringData()') Copy
-        div.stringType#typeButtons
-          a.string ShrimpBP
-          a.json JSON
+        div.selectors
+          button.selected-tab#string-button(onclick='changeCurrentStringType()') ShrimpBP
+          button.tab#json-button(onclick='changeCurrentStringType()') JSON
       div.data
         p.string#blueprint-string #{bpString}
         p.json#blueprint-json #{bpJSON}

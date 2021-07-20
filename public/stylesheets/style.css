@@ -3,7 +3,7 @@
   --blue: #6af;
   --dark-blue: #48d;
   --grey: #ccc;
-  --dar-grey: #555;
+  --dark-grey: #555;
   --gap-between-containers: 2.5rem;
 }
 
@@ -12,6 +12,7 @@ body {
   margin: 0;
   color: #000;
   font: 1.5rem Calibri, Arial, sans-serif;
+  overflow: hidden;
 }
 
 a {
@@ -62,26 +63,27 @@ a {
   margin: 0;
   list-style: none;
   white-space: nowrap;
+  overflow: hidden;
 }
 .navbar-root .container .nav .item {
-  padding: 0 1rem;
+  margin: 0 0.6rem;
   font-size: 1.75rem;
 }
 .navbar-root .container .nav .item:hover {
   transform: translateY(-1px);
 }
+.navbar-root .container .nav .item:hover > .link {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
 .navbar-root .container .nav .item:active {
   transform: translateY(1px);
 }
-.navbar-root .container .nav .link {
+.navbar-root .container .nav .item:active > .link {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px 0px inset;
+}
+.navbar-root .container .nav .item .link {
   padding: 0 0.4rem;
   border-radius: 0.5rem;
-}
-.navbar-root .container .nav .link:hover {
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-}
-.navbar-root .container .nav .link:active {
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px 0px inset;
 }
 .navbar-root .container .user {
   display: block;
@@ -99,17 +101,22 @@ a {
   border-radius: 100%;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
-.navbar-root .container .user .avatar:hover {
-  background-color: var(--dark-blue);
-}
 .navbar-root .container .user .avatar:active {
-  transform: translateY(1px);
-  box-shadow: none;
+  transform: translateY(2px);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px 0px inset;
 }
 .navbar-root .container .user .name {
   margin-left: 0.2rem;
-  padding-right: 0.5rem;
+  padding: 0 0.5rem;
   border-radius: 0.5rem;
+}
+.navbar-root .container .user .name:hover {
+  transform: translateY(-1px);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.navbar-root .container .user .name:active {
+  transform: translateY(1px);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px 0px inset;
 }
 .navbar-root .container .user .login {
   left: 0;
@@ -139,29 +146,50 @@ a {
 .navbar-root .container .discord-login {
   height: 1rem;
 }
-.navbar-root .content {
-  padding: 3rem;
-}
 
 .header {
   padding: 0 var(--gap-between-containers);
   height: 4rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   margin: 3rem 0 1.65rem 0;
 }
 .header .title {
+  grid-area: span 1/span 1;
   font-weight: 900;
-  font-size: 2.5rem;
+  font-size: 2rem;
+  float: left;
+}
+.header .tags {
+  grid-area: span 1/span 1;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 1rem;
+  padding-right: 0;
+  word-break: break-all;
+}
+.header .tags .tag {
+  text-align: center;
+  font-size: 1.25rem;
+  padding: 0.1rem 0.5rem;
+  margin: 0.25rem;
+  margin-top: auto;
+  border-radius: 2rem 0 2rem 2rem;
+  color: #fff;
+}
+.header .tags .tag::before {
+  content: "#";
 }
 .header .icons {
   position: relative;
   display: flex;
   flex-wrap: wrap;
   padding: 0;
-  margin-top: -1rem;
-  float: right;
 }
 .header .icons > * .icon {
   padding: 0.4rem;
+  width: 2rem;
+  height: 2rem;
   filter: invert(66%) sepia(0%) saturate(62%) hue-rotate(145deg) brightness(93%) contrast(89%);
 }
 .header .icons .star .icon {
@@ -183,129 +211,95 @@ a {
   filter: invert(68%) sepia(40%) saturate(7087%) hue-rotate(192deg) brightness(91%) contrast(90%);
 }
 .header .line {
-  height: 0.1rem;
-  background-color: var(--dar-grey);
+  grid-area: span 2/span 3;
+  height: 0.15rem;
+  background-color: var(--dark-grey);
 }
 .header .author {
   font-weight: 800;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   color: var(--blue);
 }
 
-.blueprint {
-  display: grid;
-  grid-template-rows: 10rem 15rem 14rem;
-  grid-template-columns: 3fr 1.5fr 0.5fr;
-  gap: var(--gap-between-containers);
+.content {
   padding: var(--gap-between-containers);
+  height: auto;
 }
-.blueprint div {
+.content .blueprint {
+  display: grid;
+  grid-template-rows: auto 35% auto;
+  grid-template-columns: 3fr 1.5fr;
+  gap: var(--gap-between-containers);
+}
+.content .blueprint > * {
   background-color: var(--grey);
   border-radius: 0.5rem;
   padding: 1rem;
 }
-.blueprint div::-webkit-scrollbar {
+.content .blueprint > * ::-webkit-scrollbar {
   width: 20px;
 }
-.blueprint div::-webkit-scrollbar-thumb {
+.content .blueprint > * ::-webkit-scrollbar-thumb {
   background-color: #555;
   background-clip: padding-box;
   border-radius: 10px;
   border: 5px solid rgba(0, 0, 0, 0);
 }
-.blueprint .viewport {
+.content .blueprint .viewport {
   padding: 0;
   grid-area: span 2/span 1;
+  cursor: grab;
 }
-.blueprint .viewport .canvas {
+.content .blueprint .viewport .canvas {
   width: 100%;
   height: 100%;
   border-radius: 0.5rem;
   overflow: hidden;
 }
-.blueprint .stats {
-  grid-area: span 1/span 1;
-  margin-left: auto;
+.content .blueprint .viewport .canvas:active {
+  cursor: grabbing;
 }
-.blueprint .stats .list {
+.content .blueprint .stats {
+  grid-area: span 1/span 1;
+}
+.content .blueprint .stats .list {
   margin: -0.25rem 0;
   padding: 0;
   font-size: inherit;
 }
-.blueprint .stats .title {
+.content .blueprint .stats .title {
   font-weight: bold;
   padding-right: 1rem;
 }
-.blueprint .stats .title::after {
+.content .blueprint .stats .title::after {
   content: ":";
 }
-.blueprint .tags {
+.content .blueprint .description {
   grid-area: span 1/span 1;
-  display: flex;
-  flex-wrap: wrap;
-  padding-right: 0;
-  word-break: break-all;
-  overflow-y: auto;
-}
-.blueprint .tags .tag {
-  font-weight: bold;
-  text-align: center;
-  padding: 0.25rem 0.5rem;
-  margin: 0.25rem;
-  border-radius: 2rem 0 2rem 2rem;
-}
-.blueprint .description {
-  grid-area: span 1/span 2;
   overflow-y: auto;
   padding: 0 0 0 1rem;
 }
-.blueprint .description > * {
+.content .blueprint .description > * {
   margin: 1rem 0;
 }
-.blueprint .forks {
+.content .blueprint .forks {
   grid-area: span 1/span 1;
 }
-.blueprint .export {
-  grid-area: span 1/span 2;
+.content .blueprint .export {
+  grid-area: span 1/span 1;
   padding: 0;
   margin: 0;
   display: grid;
   grid-template-rows: 2.5rem 11.5rem;
   position: relative;
 }
-.blueprint .export > * {
+.content .blueprint .export > * {
   grid-area: span 1/span 1;
   margin: 0;
   word-break: break-all;
 }
-.blueprint .export .stringTypeCB {
-  position: absolute;
-  opacity: 0;
-  right: 0.5rem;
-  top: 0;
-  width: 11rem;
-  height: 2.5rem;
-  border-radius: 0.5rem 0.5rem 0 0;
-  z-index: 1;
-}
-.blueprint .export .stringTypeCB:hover + .nav .stringType .string,
-.blueprint .export .stringTypeCB:hover + .nav .stringType .json {
-  transition: background-color 0.5s;
-}
-.blueprint .export .stringTypeCB:checked + .nav .stringType .string {
-  background-color: var(--blue);
-}
-.blueprint .export .stringTypeCB:checked + .nav .stringType .json {
-  background-color: var(--grey);
-}
-.blueprint .export .stringTypeCB:checked ~ .data .string {
-  display: none;
-}
-.blueprint .export .stringTypeCB:checked ~ .data .json {
-  display: grid;
-}
-.blueprint .export .nav {
-  background-color: var(--dar-grey);
+.content .blueprint .export .nav {
+  background-color: var(--dark-grey);
   position: relative;
   display: inline-flex;
   flex-flow: row nowrap;
@@ -315,58 +309,85 @@ a {
   text-align: center;
   user-select: none;
 }
-.blueprint .export .nav > * {
+.content .blueprint .export .nav > * {
   font-size: 1.5rem;
+  padding: 0 0.5rem 0.425rem 0.5rem;
+  border: none;
   color: #fff;
 }
-.blueprint .export .nav .copy {
+.content .blueprint .export .nav .copy {
   height: calc(100% - 0.25rem);
   background-color: var(--blue);
-  border: none;
   padding: 0 0.5rem;
   border-radius: 0.5rem;
 }
-.blueprint .export .nav .copy:hover {
+.content .blueprint .export .nav .copy:hover {
   transform: translateY(-1px);
   box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 4px;
 }
-.blueprint .export .nav .copy:active {
+.content .blueprint .export .nav .copy:active {
   transform: translateY(1px);
   box-shadow: rgba(0, 0, 0, 0.5) 0 1px 4px 0 inset;
 }
-.blueprint .export .nav .stringType {
-  background-color: var(--dar-grey);
-  position: absolute;
-  right: 0;
-  top: 0;
+.content .blueprint .export .nav .selectors {
   margin-left: auto;
-  padding: 0.25rem 0.5rem 0 0;
+  width: auto;
 }
-.blueprint .export .nav .stringType > * {
-  padding: 0 0.5rem 0.4rem 0.5rem;
+.content .blueprint .export .nav .selectors > * {
+  display: inline-block;
+  border: none;
+  margin: 0.65rem 0.5rem 0 0.5rem;
+  color: #fff;
+  word-break: break-all;
+  font: 1.25rem Consolas, monospace;
+  position: relative;
+}
+.content .blueprint .export .nav .selectors > *::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -0.5rem;
+  bottom: 0;
+  left: -0.5rem;
+  z-index: -1;
   border-radius: 0.5rem 0.5rem 0 0;
+  transform: scale(1.1, 1.3) perspective(0.6rem) rotateX(5deg);
+  transform-origin: bottom;
 }
-.blueprint .export .nav .stringType .string {
+.content .blueprint .export .nav .selectors #json-button {
+  padding: 0 2rem 0.05rem 2rem;
+}
+.content .blueprint .export .nav .selectors .selected-tab {
+  color: #000;
+  z-index: 2;
   background-color: var(--grey);
 }
-.blueprint .export .nav .stringType .json {
+.content .blueprint .export .nav .selectors .selected-tab::before {
+  background-color: var(--grey);
+}
+.content .blueprint .export .nav .selectors .tab {
+  z-index: 1;
   background-color: var(--blue);
 }
-.blueprint .export .data {
+.content .blueprint .export .nav .selectors .tab::before {
+  background-color: var(--blue);
+}
+.content .blueprint .export .data {
   overflow-x: hidden;
   overflow-y: auto;
-  width: auto;
+  height: calc(100% - 1.75rem);
+  padding: 1rem;
   padding-right: 0rem;
   padding-top: 0.75rem;
   font-family: monospace;
 }
-.blueprint .export .data > * {
+.content .blueprint .export .data > * {
   margin: 0;
   padding: 0;
   word-break: break-all;
-  font-size: 1rem;
+  font-size: 1.25rem;
 }
-.blueprint .export .data .json {
+.content .blueprint .export .data .json {
   display: none;
 }
 

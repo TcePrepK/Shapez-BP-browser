@@ -36,6 +36,10 @@ html
               |  Log In
     div.header
       a.title #{title}
+      div.tags
+        table.list
+          each tag in tags
+            div.tag(id=tag) #{tag}
       div.icons
         a.star(href='/')
           input.clickbox(type='checkbox')

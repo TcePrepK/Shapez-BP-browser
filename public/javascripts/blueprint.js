@@ -27,6 +27,7 @@ const spriteDims = {
     },
   },
 };
+
 const backgroundColors = {
   light: {
     background: '#ffffff',
@@ -37,13 +38,14 @@ const backgroundColors = {
   dark: {
     background: '#3e3f47',
     gridLines: '#42434b',
-    border: '#83d8ff',
-    outOfBounds: '#f7f7ff',
+    border: '#156abc',
+    outOfBounds: '#292930',
   },
 };
+
 const blueprintMargin = 1;
 
-let spritesheet, viewport, bpString, bpJSON;
+let spritesheet, viewport, bpString, bpJSON, stringButton, jsonButton;
 
 const defsByCode = new Map();
 const defsByName = new Map();
@@ -51,8 +53,10 @@ const defsByName = new Map();
 function init() {
   spritesheet = document.getElementById('sprites');
   viewport = document.getElementById('viewport');
-  bpString = document.getElementById('blueprint-string').innerText;
-  bpJSON = document.getElementById('blueprint-json').innerText;
+  bpString = document.getElementById('blueprint-string');
+  bpJSON = document.getElementById('blueprint-json');
+  stringButton = document.getElementById('string-button');
+  jsonButton = document.getElementById('json-button');
 
   fetch(defsUrl)
     .then(r => r.json())
@@ -63,16 +67,33 @@ function init() {
 
 let currentDataType = 'string';
 function changeCurrentStringType() {
+  stringButton.classList.remove('tab');
+  jsonButton.classList.remove('tab');
+  stringButton.classList.remove('selected-tab');
+  jsonButton.classList.remove('selected-tab');
+
   if(currentDataType == 'string') {
     currentDataType = 'json';
+
+    bpString.style.display = 'none';
+    bpJSON.style.display = 'grid';
+
+    stringButton.classList.add('tab');
+    jsonButton.classList.add('selected-tab');
   } else {
     currentDataType = 'string';
+
+    bpString.style.display = 'grid';
+    bpJSON.style.display = 'none';
+
+    stringButton.classList.add('selected-tab');
+    jsonButton.classList.add('tab');
   }
 }
 
-// copies bpJSON or bpString depends on currentDataType
+// Copies bpJSON or bpString depends on currentDataType
 function copyCurrentStringData() {
-  const text = currentDataType == 'string' ? bpString : bpJSON;
+  const text = currentDataType == 'string' ? bpString.innerText : bpJSON.innerText;
   const blob = new Blob([text], { type: 'text/plain' });
   const data = [new ClipboardItem({ 'text/plain': blob })];
   navigator.clipboard.write(data);
@@ -89,7 +110,8 @@ function ready(json) {
 
   const style = { mode: 'normal', theme: 'dark' };
 
-  const bp = Blueprint.importShrimpBP(bpString);
+  const bp = Blueprint.importShrimpBP(bpString.innerText);
+  // bp.rotate(1);
   const stats = bp.stats;
   console.log(
     '%cBlueprint stats\n' +
@@ -124,12 +146,12 @@ function ready(json) {
     x: 0,
     y: 0,
     scale: clamp(
-      Math.max(viewport.width / render.width, viewport.height / render.height),
+      Math.min(viewport.width / render.width, viewport.height / render.height),
       mode.scaleBounds.min,
       mode.scaleBounds.max
     ),
     minScale: clamp(
-      Math.max(viewport.width / render.width, viewport.height / render.height),
+      Math.min(viewport.width / render.width, viewport.height / render.height),
       mode.scaleBounds.min,
       mode.scaleBounds.max
     ),
@@ -192,13 +214,14 @@ function ready(json) {
     viewport.height = viewport.clientHeight;
 
     view.minScale = clamp(
-      Math.max(viewport.width / render.width, viewport.height / render.height),
+      Math.min(viewport.width / render.width, viewport.height / render.height),
       mode.scaleBounds.min,
       mode.scaleBounds.max
     );
 
     view.scale = clamp(view.scale * deltaWidth * deltaHeight, view.minScale, mode.scaleBounds.max);
 
+    fixViewPosition(view.x, view.y, render, view);
     redrawViewport(viewport, render, view, style);
   }).observe(viewport);
 
@@ -216,10 +239,23 @@ function ready(json) {
 }
 
 function fixViewPosition(x, y, render, view) {
-  const w = 1 - viewport.width / (render.width * view.scale);
-  const h = 1 - viewport.height / (render.height * view.scale);
-  view.x = clamp(x, -w, w);
-  view.y = clamp(y, -h, h);
+  const bpW = (render.width * view.scale);
+  const bpH = (render.height * view.scale);
+
+  const w = 1 - viewport.width / bpW;
+  const h = 1 - viewport.height / bpH;
+
+  if(viewport.width > bpW) {
+    view.x = 0;
+  } else {
+    view.x = clamp(x, -w, w);
+  }
+
+  if(viewport.height > bpH) {
+    view.y = 0;
+  } else {
+    view.y = clamp(y, -h, h);
+  }
 }
 
 function clamp(value, min, max) {
@@ -576,6 +612,7 @@ class Blueprint {
       if(building.x < 0 || building.x >= this.width) {
         return acc;
       }
+
       if(building.y < 0 || building.y >= this.height) {
         return acc;
       }
